@@ -1,0 +1,5 @@
+/vendor
+/node_modules
+.env
+api-key.php
+tests_config.php
