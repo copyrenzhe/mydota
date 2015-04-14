@@ -4,8 +4,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Dota2Api\Api;
+use Dota2Api\Api as Api;
 use Dota2Api\Utils\Db;
+use App\Repositories\SteamRepository as Steam;
 
 class ApiController extends Controller {
 
@@ -29,27 +30,34 @@ class ApiController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
+	 * Judge the player is owned dota2 or not
+	 * @param int $steam the steamid of player
+	 * @return boolean
 	 */
-	public function GetOwnedGames()
+	public function OwnedGame($steamid='76561198134591399')
 	{
-		$url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=C44A91C0289CDD80307D3C76CC9522F2&steamid=76561198134591399&format=json';
+		//dota2 is a free games and it's appid is 570
+		//appids_filter is an array and should be passed like appids_filter[0]=440&appids_filter[1]=570
+		$url = 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=C44A91C0289CDD80307D3C76CC9522F2&steamid='.$steamid.'&format=json&include_played_free_games=1&include_appinfo=1&appids_filter[0]=570';
 		$r = http_curl($url);
-		// $result = json_decode($r,true);
-		return $r;
+		$result = json_decode($r,true);
+		return $result['response']['game_count'];
 	}
 
 	public function test()
 	{
-		$matchMapperWeb = new Dota2Api\Mappers\MatchMapperWeb(937739703);
+		$matchMapperWeb = new \Dota2Api\Mappers\MatchMapperWeb(937739703);
 		$match = $matchMapperWeb->load();
-		$map = new Dota2Api\Utils\Map($match->get('tower_status_radiant'), $match->get('tower_status_dire'), $match->get('barracks_status_radiant'), $match->get('barracks_status_dire'));
+		$map = new \Dota2Api\Utils\Map($match->get('tower_status_radiant'), $match->get('tower_status_dire'), $match->get('barracks_status_radiant'), $match->get('barracks_status_dire'));
 		$canvas = $map->getImage();
 		header('Content-Type: image/jpg');
 		imagejpeg($canvas);
 		imagedestroy($canvas);
+	}
+
+	public function search()
+	{
+		Steam::init('lamp');
 	}
 
 	/**
