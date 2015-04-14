@@ -59,8 +59,8 @@ class SteamRepository {
 		$html = $this->send(self::SEARCH_AJAX_URL, 'GET', $params);
 		$result = json_decode($html,true);
 		$result_html = $result['html'];
-		$pattern = '/<div class\=\"search_row\"><div class\=\"search_result_friend\"><\/div><div class\=\"mediumHolder_default" data-miniprofile="217544967" style="float:left;">
-<div class\=\"avatarMedium\"><a href\=\"(.*?)\"><img src\=\"(.*?)\"><\/a><\/div>/ix';
+		// $pattern = '/<div class\=\"search_row\"><div class\=\"search_result_friend\"><\/div><div class\=\"mediumHolder_default" data-miniprofile="217544967" style="float:left;"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/profiles\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div><div class\=\"searchPersonaInfo\"><a class\=\"searchPersonaName\" href\=\"http\:\/\/steamcommunity\.com\/profiles\/.*?\">(.*?)<\/a><br \/>(.*?)<br \/>(.*?)&nbsp;<img style\=\"margin-bottom\:-2px\" src\=\"(.*?)\" border\=\"0\" \/><\/div><div style\=\"clear\:left\"><\/div><div class\=\"search_match_info\"><div>Also known as\: <span style\=\"color\: whitesmoke\">(.*?)<\/span><\/div><\/div><\/div>/ix';
+		$pattern = '/<div class\=\"mediumHolder_default" data-miniprofile\=\".*?\" style\=\"float:left;\"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/(profiles|id)\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div>/i';
 		var_dump($result['html']);
 		return;
 	}
