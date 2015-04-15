@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.0.*",
-		"kronusme/dota2-api": "dev-master"
+		"kronusme/dota2-api": "dev-master",
+		"cagartner/phpquery": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

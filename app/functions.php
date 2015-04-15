@@ -14,5 +14,26 @@
 		return $r;
 	}
 
+	/**
+	 * filter \n,\t,\r
+	 * @param  string $string 
+	 * @return string
+	 */
+	function del_html($string)
+	{
+		$string = str_replace(' ', '', $string);
+		$string = str_replace("\n","",$string);
+		$string = str_replace("\r","",$string);
+		$string = str_replace("\t","",$string);
+		return $string;
+	}
+
+	function p($arr)
+	{
+		echo '<pre>';
+		print_r($arr);
+		echo '</pre>';
+	}
+
 
 ?>

@@ -1,5 +1,7 @@
 <?php namespace App\Repositories;
 
+use PhpQuery\PhpQuery as phpQuery;
+
 class SteamRepository {
 
 	const COOKIE='./steam.cookie';
@@ -14,6 +16,13 @@ class SteamRepository {
 	private $filter;
 	private $cookie;
 	private $g_sessionID;
+	private $steamLink;
+	private $headImg;
+	private $account;
+	private $trueName;
+	private $country;
+	private $countryImg;
+	private $cname;
 	
 	public static function init($text, $page=1, $steamid=false, $filter='users', $cookie=self::COOKIE) {
 		$Steam = new SteamRepository();
@@ -33,7 +42,7 @@ class SteamRepository {
 			return ;
 		}
 		$this->g_sessionID = $g_sessionID;
-		$this->getHtmlLoop();		
+		$this->getAllElements();		
 	}
 	
 	private function searchPage() {
@@ -48,7 +57,7 @@ class SteamRepository {
 		return !empty($sessionId)?$sessionId:false;
 	}
 
-	private function getHtmlLoop(){
+	private function getAllElements(){
 		$params = array(
 				'text' => $this->text,
 				'filter' => $this->filter,
@@ -59,9 +68,39 @@ class SteamRepository {
 		$html = $this->send(self::SEARCH_AJAX_URL, 'GET', $params);
 		$result = json_decode($html,true);
 		$result_html = $result['html'];
-		// $pattern = '/<div class\=\"search_row\"><div class\=\"search_result_friend\"><\/div><div class\=\"mediumHolder_default" data-miniprofile="217544967" style="float:left;"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/profiles\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div><div class\=\"searchPersonaInfo\"><a class\=\"searchPersonaName\" href\=\"http\:\/\/steamcommunity\.com\/profiles\/.*?\">(.*?)<\/a><br \/>(.*?)<br \/>(.*?)&nbsp;<img style\=\"margin-bottom\:-2px\" src\=\"(.*?)\" border\=\"0\" \/><\/div><div style\=\"clear\:left\"><\/div><div class\=\"search_match_info\"><div>Also known as\: <span style\=\"color\: whitesmoke\">(.*?)<\/span><\/div><\/div><\/div>/ix';
-		$pattern = '/<div class\=\"mediumHolder_default" data-miniprofile\=\".*?\" style\=\"float:left;\"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/(profiles|id)\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div>/i';
-		var_dump($result['html']);
+		//$pattern = '/<div class\=\"mediumHolder_default" data-miniprofile\=\".*?\" style\=\"float:left;\"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/(profiles|id)\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div>/i';
+		//__DIR__.'/../app/functions.php';
+		$res = phpQuery::newDocument($result_html);
+		$search_row = phpQuery::pq($res)->find('.search_row');
+		
+		phpQuery::each($search_row,function($item,$data){
+			echo phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
+			/*$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
+			$this->account[] = phpQuery::pq($data)->find('.searchPersonaName')->html();
+			$string = phpQuery::pq($data)->find('.searchPersonaInfo')->html();
+			$string = preg_replace('/(<a.*?>.*?<\/a>)/i', '', $string);
+			$string = preg_replace('/(<img.*?>)/i', '', $string);
+			$string = del_html($string);
+			$Arr = explode('<br>', $string);
+			$this->country[] = $Arr[count($Arr)-1];
+			$this->trueName[] = $Arr[count($Arr)-2];
+			$this->countryImg[] = phpQuery::pq($data)->find('.searchPersonaInfo')->find('img')->attr('src');
+			$match_info = phpQuery::pq($data)->find('.search_match_info')->html();
+			$match_info_arr = explode('Also known as:', $match_info);
+			$match_info_arr[1] = preg_replace('/<\/?div.*?>/i', '', $match_info_arr[1]);
+			$this->cname[] = del_html(preg_replace('/<\/?span.*?>/i', '', $match_info_arr[1]));*/
+		});
+		// var_dump($result['html']);
+		/*foreach ($this->steamLink as $key => $value) {
+			$r[$key]['steamLink'] = $value;
+			$r[$key]['headImg'] = $this->headImg[$key];
+			$r[$key]['account'] = $this->account[$key];
+			$r[$key]['country'] = $this->country[$key];
+			$r[$key]['trueName'] = $this->trueName[$key];
+			$r[$key]['countryImg'] = $this->countryImg[$key];
+			$r[$key]['cname'] = $this->cname[$key];
+		}
+		p($r);*/
 		return;
 	}
 	
