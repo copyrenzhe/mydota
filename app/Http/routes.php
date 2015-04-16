@@ -15,7 +15,7 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
-Route::get('test','ApiController@search');
+Route::get('search/{text}','ApiController@search');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

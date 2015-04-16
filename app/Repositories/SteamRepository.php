@@ -5,10 +5,12 @@ use PhpQuery\PhpQuery as phpQuery;
 class SteamRepository {
 
 	const COOKIE='./steam.cookie';
+	const FCOOKIE='./steamidfinder.cookie';
 	const USERAGENT='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
 	const SEARCH_AJAX_URL='http://steamcommunity.com/search/SearchCommunityAjax';
 	const REFERER='http://steamcommunity.com/search';
 	const SEARCH_ACTION_URL='http://steamcommunity.com/search';
+	const STEAMID_FINDER_URL = 'http://steamidfinder.com/Converter.asmx/SimpleData';
 
 	private $text;
 	private $page;
@@ -17,6 +19,7 @@ class SteamRepository {
 	private $cookie;
 	private $g_sessionID;
 	private $steamLink;
+	private $steamId;
 	private $headImg;
 	private $account;
 	private $trueName;
@@ -31,8 +34,7 @@ class SteamRepository {
 		$Steam->steamid = $steamid;
 		$Steam->filter = $filter;
 		$Steam->cookie = $cookie;
-		$Steam->search();
-		return $Steam;
+		return $Steam->search();
 	}
 	
 	public function search() {
@@ -42,7 +44,7 @@ class SteamRepository {
 			return ;
 		}
 		$this->g_sessionID = $g_sessionID;
-		$this->getAllElements();		
+		return $this->getAllElements();		
 	}
 	
 	private function searchPage() {
@@ -70,12 +72,14 @@ class SteamRepository {
 		$result_html = $result['html'];
 		//$pattern = '/<div class\=\"mediumHolder_default" data-miniprofile\=\".*?\" style\=\"float:left;\"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/(profiles|id)\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div>/i';
 		//__DIR__.'/../app/functions.php';
+		// $result_html = file_get_contents('http://www.belusky.com/test.html');
 		$res = phpQuery::newDocument($result_html);
 		$search_row = phpQuery::pq($res)->find('.search_row');
 		
 		phpQuery::each($search_row,function($item,$data){
-			echo phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
-			/*$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
+			$steamLink = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
+			$this->steamId[] = $this->getSteamId($steamLink);
+			$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
 			$this->account[] = phpQuery::pq($data)->find('.searchPersonaName')->html();
 			$string = phpQuery::pq($data)->find('.searchPersonaInfo')->html();
 			$string = preg_replace('/(<a.*?>.*?<\/a>)/i', '', $string);
@@ -87,11 +91,15 @@ class SteamRepository {
 			$this->countryImg[] = phpQuery::pq($data)->find('.searchPersonaInfo')->find('img')->attr('src');
 			$match_info = phpQuery::pq($data)->find('.search_match_info')->html();
 			$match_info_arr = explode('Also known as:', $match_info);
-			$match_info_arr[1] = preg_replace('/<\/?div.*?>/i', '', $match_info_arr[1]);
-			$this->cname[] = del_html(preg_replace('/<\/?span.*?>/i', '', $match_info_arr[1]));*/
+			if(!empty($match_info_arr[1])){
+				$match_info_arr[1] = preg_replace('/<\/?div.*?>/i', '', $match_info_arr[1]);
+			}else{
+				$match_info_arr[1] = '';
+			}
+			$this->cname[] = del_html(preg_replace('/<\/?span.*?>/i', '', $match_info_arr[1]));
 		});
 		// var_dump($result['html']);
-		/*foreach ($this->steamLink as $key => $value) {
+		foreach ($this->steamLink as $key => $value) {
 			$r[$key]['steamLink'] = $value;
 			$r[$key]['headImg'] = $this->headImg[$key];
 			$r[$key]['account'] = $this->account[$key];
@@ -100,8 +108,26 @@ class SteamRepository {
 			$r[$key]['countryImg'] = $this->countryImg[$key];
 			$r[$key]['cname'] = $this->cname[$key];
 		}
-		p($r);*/
-		return;
+		return $r;
+	}
+
+	/**
+	 * get steamid with steamlink from http://steamidfinder.com/
+	 * @return Array
+	 * @example  $steamLink = 'http://steamcommunity.com/id/ronnocoenahs';
+	 *           return array(
+	 *            		converted: "STEAM_0:0:57501155",
+	 *					steam2Id: "STEAM_0:0:57501155",
+	 *					steam3Id: "U:1:115002310",
+	 *					steam64: "76561198075268038"
+	 *					);
+	 */
+
+	private function getSteamId($steamLink){
+		$params = array(
+				'UserInput' => $steamLink
+			);
+		
 	}
 	
 	private function send($url, $type='GET', $params=false) {

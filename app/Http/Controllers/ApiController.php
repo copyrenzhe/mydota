@@ -55,9 +55,11 @@ class ApiController extends Controller {
 		imagedestroy($canvas);
 	}
 
-	public function search()
+	public function search($text)
 	{
-		Steam::init('lamp');
+		// Steam::init('lamp');
+		// if()
+		$search_r = Steam::init($text);
 	}
 
 	/**
