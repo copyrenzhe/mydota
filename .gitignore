@@ -3,3 +3,4 @@
 .env
 api-key.php
 tests_config.php
+composer.lock
