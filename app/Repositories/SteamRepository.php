@@ -5,12 +5,10 @@ use PhpQuery\PhpQuery as phpQuery;
 class SteamRepository {
 
 	const COOKIE='./steam.cookie';
-	const FCOOKIE='./steamidfinder.cookie';
 	const USERAGENT='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
 	const SEARCH_AJAX_URL='http://steamcommunity.com/search/SearchCommunityAjax';
 	const REFERER='http://steamcommunity.com/search';
 	const SEARCH_ACTION_URL='http://steamcommunity.com/search';
-	const STEAMID_FINDER_URL = 'http://steamidfinder.com/Converter.asmx/SimpleData';
 
 	private $text;
 	private $page;
@@ -77,7 +75,7 @@ class SteamRepository {
 		$search_row = phpQuery::pq($res)->find('.search_row');
 		
 		phpQuery::each($search_row,function($item,$data){
-			$steamLink = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
+			$this->steamLink[] = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
 			$this->steamId[] = $this->getSteamId($steamLink);
 			$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
 			$this->account[] = phpQuery::pq($data)->find('.searchPersonaName')->html();
@@ -101,6 +99,7 @@ class SteamRepository {
 		// var_dump($result['html']);
 		foreach ($this->steamLink as $key => $value) {
 			$r[$key]['steamLink'] = $value;
+			$r[$key]['steamId'] = $this->getSteamId($value);
 			$r[$key]['headImg'] = $this->headImg[$key];
 			$r[$key]['account'] = $this->account[$key];
 			$r[$key]['country'] = $this->country[$key];
@@ -124,10 +123,10 @@ class SteamRepository {
 	 */
 
 	private function getSteamId($steamLink){
-		$params = array(
-				'UserInput' => $steamLink
-			);
-		
+		$pattern = '/g_rgProfileData \= \{\"url\"\:.*?\"steamid\"\:\"(.*?)\".*?\}/';
+		$steamHomePage = $this->send($steamLink);
+		preg_match($pattern,$steamHomePage,$matchs);
+		return $matchs[1];
 	}
 	
 	private function send($url, $type='GET', $params=false) {
