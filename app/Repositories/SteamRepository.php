@@ -75,7 +75,7 @@ class SteamRepository {
 		$search_row = phpQuery::pq($res)->find('.search_row');
 		
 		phpQuery::each($search_row,function($item,$data){
-			$this->steamLink[] = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
+			$this->steamLink[] = $steamLink = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
 			$this->steamId[] = $this->getSteamId($steamLink);
 			$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
 			$this->account[] = phpQuery::pq($data)->find('.searchPersonaName')->html();

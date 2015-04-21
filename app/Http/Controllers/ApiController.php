@@ -60,6 +60,7 @@ class ApiController extends Controller {
 		// Steam::init('lamp');
 		// if()
 		$search_r = Steam::init($text);
+		return $search_r;
 	}
 
 	/**
