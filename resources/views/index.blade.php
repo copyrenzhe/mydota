@@ -28,11 +28,9 @@
 @section('content')
 <div class="container">
 	<div class="header">
-		<form action="{{ url('/search') }}" method="GET">
-			<div class="search-box">
-				<input type="text" name="search" class="search" placeholder="输入国服昵称或数字ID"><input class="index-search" type="submit" value="搜索">
-			</div>
-		</form>
+		<div class="search-box">
+			<input type="text" name="search" class="search" placeholder="输入国服昵称或数字ID"><input class="index-search" type="button" value="搜索" onclick="js_search();">
+		</div>
 	</div>
 </div>
 @endsection

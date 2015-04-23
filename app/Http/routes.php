@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/', ['as' => 'index.index', 'uses'=> 'IndexController@index']);
 
-Route::get('home', 'HomeController@index');
+Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
-Route::get('search/{text}','ApiController@search');
+Route::get('/search/{text}',['as' => 'api.search', 'uses' => 'ApiController@search']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -44,7 +44,7 @@ class ApiController extends Controller {
 		return $result['response']['game_count'];
 	}
 
-	public function test()
+	public function createMap()
 	{
 		$matchMapperWeb = new \Dota2Api\Mappers\MatchMapperWeb(937739703);
 		$match = $matchMapperWeb->load();
