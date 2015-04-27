@@ -17,6 +17,8 @@ Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
 Route::get('/search/{text}',['as' => 'api.search', 'uses' => 'ApiController@search']);
 
+Route::get('/history/{steamid}', ['as'=>'api.gethistorymatches','uses'=>'ApiController@getHistoryMatches']);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
