@@ -1,14 +1,15 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
 use PhpQuery\PhpQuery as phpQuery;
 
 class SteamRepository {
 
-	const COOKIE='./steam.cookie';
-	const USERAGENT='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
-	const SEARCH_AJAX_URL='http://steamcommunity.com/search/SearchCommunityAjax';
-	const REFERER='http://steamcommunity.com/search';
-	const SEARCH_ACTION_URL='http://steamcommunity.com/search';
+	const COOKIE            = './steam.cookie';
+	const USERAGENT         = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36';
+	const SEARCH_AJAX_URL   = 'http://steamcommunity.com/search/SearchCommunityAjax';
+	const REFERER           = 'http://steamcommunity.com/search';
+	const SEARCH_ACTION_URL = 'http://steamcommunity.com/search';
 
 	private $text;
 	private $page;
@@ -24,57 +25,57 @@ class SteamRepository {
 	private $country;
 	private $countryImg;
 	private $cname;
-	
-	public static function init($text, $page=1, $steamid=false, $filter='users', $cookie=self::COOKIE) {
-		$Steam = new SteamRepository();
-		$Steam->text = $text;
-		$Steam->page = $page;
+
+	public static function init($text, $page = 1, $steamid = false, $filter = 'users', $cookie = self::COOKIE) {
+		$Steam          = new SteamRepository();
+		$Steam->text    = $text;
+		$Steam->page    = $page;
 		$Steam->steamid = $steamid;
-		$Steam->filter = $filter;
-		$Steam->cookie = $cookie;
+		$Steam->filter  = $filter;
+		$Steam->cookie  = $cookie;
 		return $Steam->search();
 	}
-	
+
 	public function search() {
-		$html = $this->searchPage();
+		$html        = $this->searchPage();
 		$g_sessionID = $this->getSessionID($html);
-		if(empty($g_sessionID)){
-			return ;
+		if (empty($g_sessionID)) {
+			return;
 		}
 		$this->g_sessionID = $g_sessionID;
-		return $this->getAllElements();		
+		return $this->getAllElements();
 	}
-	
+
 	private function searchPage() {
 		return $this->send(self::SEARCH_ACTION_URL);
 	}
-	
+
 	private function getSessionID($html) {
 		$pattern = '/g_sessionID = \"(.*?)\"/iu';
-		if(preg_match($pattern, $html, $matchs)) {
+		if (preg_match($pattern, $html, $matchs)) {
 			$sessionId = $matchs[1];
 		}
-		return !empty($sessionId)?$sessionId:false;
+		return !empty($sessionId) ? $sessionId : false;
 	}
 
-	private function getAllElements(){
+	private function getAllElements() {
 		$params = array(
-				'text' => $this->text,
-				'filter' => $this->filter,
-				'sessionid' => $this->g_sessionID,
-				'steamid_user' => $this->steamid,
-				'page' => $this->page
+			'text'         => $this->text,
+			'filter'       => $this->filter,
+			'sessionid'    => $this->g_sessionID,
+			'steamid_user' => $this->steamid,
+			'page'         => $this->page,
 		);
-		$html = $this->send(self::SEARCH_AJAX_URL, 'GET', $params);
-		$result = json_decode($html,true);
+		$html        = $this->send(self::SEARCH_AJAX_URL, 'GET', $params);
+		$result      = json_decode($html, true);
 		$result_html = $result['html'];
 		//$pattern = '/<div class\=\"mediumHolder_default" data-miniprofile\=\".*?\" style\=\"float:left;\"><div class\=\"avatarMedium\"><a href\=\"http\:\/\/steamcommunity\.com\/(profiles|id)\/(.*?)\"><img src\=\"(.*?)\"><\/a><\/div><\/div>/i';
 		//__DIR__.'/../app/functions.php';
 		// $result_html = file_get_contents('http://www.belusky.com/test.html');
-		$res = phpQuery::newDocument($result_html);
+		$res        = phpQuery::newDocument($result_html);
 		$search_row = phpQuery::pq($res)->find('.search_row');
-		
-		phpQuery::each($search_row,function($item,$data){
+
+		phpQuery::each($search_row, function ($item, $data) {
 			$this->steamLink[] = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
 			$this->steamId[] = $this->getSteamId($steamLink);
 			$this->headImg[] = phpQuery::pq($data)->find('.avatarMedium')->find('img')->attr('src');
@@ -84,28 +85,28 @@ class SteamRepository {
 			$string = preg_replace('/(<img.*?>)/i', '', $string);
 			$string = del_html($string);
 			$Arr = explode('<br>', $string);
-			$this->country[] = $Arr[count($Arr)-1];
-			$this->trueName[] = $Arr[count($Arr)-2];
+			$this->country[] = $Arr[count($Arr) - 1];
+			$this->trueName[] = $Arr[count($Arr) - 2];
 			$this->countryImg[] = phpQuery::pq($data)->find('.searchPersonaInfo')->find('img')->attr('src');
 			$match_info = phpQuery::pq($data)->find('.search_match_info')->html();
 			$match_info_arr = explode('Also known as:', $match_info);
-			if(!empty($match_info_arr[1])){
+			if (!empty($match_info_arr[1])) {
 				$match_info_arr[1] = preg_replace('/<\/?div.*?>/i', '', $match_info_arr[1]);
-			}else{
+			} else {
 				$match_info_arr[1] = '';
 			}
 			$this->cname[] = del_html(preg_replace('/<\/?span.*?>/i', '', $match_info_arr[1]));
 		});
 		// var_dump($result['html']);
 		foreach ($this->steamLink as $key => $value) {
-			$r[$key]['steamLink'] = $value;
-			$r[$key]['steamId'] = $this->getSteamId($value);
-			$r[$key]['headImg'] = $this->headImg[$key];
-			$r[$key]['account'] = $this->account[$key];
-			$r[$key]['country'] = $this->country[$key];
-			$r[$key]['trueName'] = $this->trueName[$key];
+			$r[$key]['steamLink']  = $value;
+			$r[$key]['steamId']    = $this->getSteamId($value);
+			$r[$key]['headImg']    = $this->headImg[$key];
+			$r[$key]['account']    = $this->account[$key];
+			$r[$key]['country']    = $this->country[$key];
+			$r[$key]['trueName']   = $this->trueName[$key];
 			$r[$key]['countryImg'] = $this->countryImg[$key];
-			$r[$key]['cname'] = $this->cname[$key];
+			$r[$key]['cname']      = $this->cname[$key];
 		}
 		return $r;
 	}
@@ -122,23 +123,23 @@ class SteamRepository {
 	 *					);
 	 */
 
-	private function getSteamId($steamLink){
-		$pattern = '/g_rgProfileData \= \{\"url\"\:.*?\"steamid\"\:\"(.*?)\".*?\}/';
+	private function getSteamId($steamLink) {
+		$pattern       = '/g_rgProfileData \= \{\"url\"\:.*?\"steamid\"\:\"(.*?)\".*?\}/';
 		$steamHomePage = $this->send($steamLink);
-		preg_match($pattern,$steamHomePage,$matchs);
+		preg_match($pattern, $steamHomePage, $matchs);
 		return $matchs[1];
 	}
-	
-	private function send($url, $type='GET', $params=false) {
+
+	private function send($url, $type = 'GET', $params = false) {
 		$ch = curl_init($url); //初始化
 		curl_setopt($ch, CURLOPT_HEADER, 0); //不返回header部分
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); //返回字符串，而非直接输出
-		curl_setopt($ch, CURLOPT_COOKIEFILE,  $this->cookie); //发送cookies
-		curl_setopt($ch, CURLOPT_COOKIEJAR,  $this->cookie); //存储cookies
-		if($type==="POST") {
+		curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookie); //发送cookies
+		curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookie); //存储cookies
+		if ($type === "POST") {
 			curl_setopt($ch, CURLOPT_POST, 1);
 		}
-		if(!empty($params) && is_array($params)) {
+		if (!empty($params) && is_array($params)) {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
 			curl_setopt($ch, CURLOPT_REFERER, self::REFERER);
 		} else {
