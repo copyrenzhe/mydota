@@ -21,7 +21,7 @@ class ApiController extends Controller {
 	 *
 	 * @return int
 	 */
-	public function GetNumberOfCurrentPlayers()
+	public function getNumberOfCurrentPlayers()
 	{
 		$url = 'http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1?appid=570&format=json';
 		$r = http_curl($url);
@@ -34,7 +34,7 @@ class ApiController extends Controller {
 	 * @param int $steam the steamid of player
 	 * @return boolean
 	 */
-	public function OwnedGame($steamid='76561198134591399')
+	public function ownedGame($steamid)
 	{
 		//dota2 is a free games and it's appid is 570
 		//appids_filter is an array and should be passed like appids_filter[0]=440&appids_filter[1]=570
@@ -44,9 +44,25 @@ class ApiController extends Controller {
 		return $result['response']['game_count'];
 	}
 
-	public function test()
+    /**
+     * get History of dota2
+     * @param  long $steamid 64byte steamId or 32byte steamId
+     * @return array  Arraylist of matches history
+     */
+	public function getHistoryMatches($steamid)
 	{
-		$matchMapperWeb = new \Dota2Api\Mappers\MatchMapperWeb(937739703);
+		$matchesMapperWeb = new \Dota2Api\Mappers\MatchesMapperWeb();
+		$matchesMapperWeb->setAccountId($steamid);
+        $matchesShortInfo = $matchesMapperWeb->load();
+        foreach ($matchesShortInfo as $key=>$matchShortInfo) {
+            $matchMapper = new \Dota2Api\Mappers\MatchMapperWeb($key);
+            $match[] = $matchMapper->load();
+        }
+	}
+
+	public function createMap($matchid)
+	{
+		$matchMapperWeb = new \Dota2Api\Mappers\MatchMapperWeb($matchid);
 		$match = $matchMapperWeb->load();
 		$map = new \Dota2Api\Utils\Map($match->get('tower_status_radiant'), $match->get('tower_status_dire'), $match->get('barracks_status_radiant'), $match->get('barracks_status_dire'));
 		$canvas = $map->getImage();
@@ -60,6 +76,7 @@ class ApiController extends Controller {
 		// Steam::init('lamp');
 		// if()
 		$search_r = Steam::init($text);
+		return $search_r;
 	}
 
 	/**
