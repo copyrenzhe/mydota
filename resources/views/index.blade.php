@@ -10,16 +10,19 @@
 		padding: 9px 7px;
 		font: 16px arial;
 		float: left;
+		border: 1px solid #d8d8d8;
+		border-bottom: 1px solid #ccc;
 	}
 
 	.container .search-box .index-search{
-		line-height: 40px;
+		line-height: 38px;
 		background-color: #38f;
 		padding: 0px;
 		border: 0;
 		width: 100px;
 		color: white;
 		font-size: 16px;
+		height: 38px;
 	}
 
 </style>
