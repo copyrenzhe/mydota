@@ -1,4 +1,5 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
 use PhpQuery\PhpQuery as phpQuery;
 
@@ -79,7 +80,6 @@ class SteamRepository
         // $result_html = file_get_contents('http://www.belusky.com/test.html');
         $res = phpQuery::newDocument($result_html);
         $search_row = phpQuery::pq($res)->find('.search_row');
-
         phpQuery::each($search_row, function ($item, $data) {
             $this->steamLink[] = $steamLink = phpQuery::pq($data)->find('.avatarMedium a')->attr('href');
             $this->steamId[] = $this->getSteamId($steamLink);
@@ -127,7 +127,6 @@ class SteamRepository
      *                    steam64: "76561198075268038"
      *                    );
      */
-
     private function getSteamId($steamLink)
     {
         $pattern = '/g_rgProfileData \= \{\"url\"\:.*?\"steamid\"\:\"(.*?)\".*?\}/';
