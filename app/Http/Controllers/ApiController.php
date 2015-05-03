@@ -12,7 +12,7 @@ class ApiController extends Controller {
 
 	public function __construct()
 	{
-		Api::init(API_KEY, array('localhost', 'root', '', 'dota2_db', ''), false);
+		// Api::init(API_KEY, array('localhost', 'root', '', 'dota2_db', ''), false);
 	}
 
 
