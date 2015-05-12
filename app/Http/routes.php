@@ -23,3 +23,5 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('/match/info/{matchid}',['as' => 'match.info', 'uses' => 'MatchController@info']);
