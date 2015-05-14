@@ -6,3 +6,5 @@ tests_config.php
 composer.lock
 *.cookie
 /nbproject/
+.tags
+.tags_sorted_by_file
