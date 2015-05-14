@@ -1,6 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Controllers\ApiController;
+
 class IndexController extends Controller {
+
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -30,7 +34,12 @@ class IndexController extends Controller {
 	 */
 	public function index()
 	{
-		return view('index',['abc'=>'something']);
+		$api = new ApiController();
+		$data = array(
+			'current_num' => $api->getNumberOfCurrentPlayers()
+			);
+
+		return view('index',['data'=> $data]);
 	}
 
 }

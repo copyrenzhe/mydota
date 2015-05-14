@@ -12,5 +12,13 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+    mix.less('app.less','resources/css');
+
+    mix.styles([
+    	'libs/global.css',
+    	'libs/heropedia.css',
+    	'app.css',
+    	'match.css'
+    ],null,'resources/css');
+
 });
