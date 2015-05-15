@@ -53,7 +53,7 @@ class ApiController extends Controller
      */
     public function getHistoryMatches($steamid = null)
     {
-        $startTime = microtime_float();
+        ini_set('max_execution_time', 0);
         $matchesMapperWeb = new MatchesMapperAll();
         if (isset($steamid) !== null) {
             $matchesMapperWeb->setAccountId($steamid);
@@ -65,10 +65,8 @@ class ApiController extends Controller
             $matchMapper = new MatchMapperWeb($matchid);
             $match = $matchMapper->load();
             $mm = new MatchMapperDb();
-            $mm->save($match);
+            $mm->save($match, false);
         }
-        $endTime = microtime_float();
-        echo $endTime - $startTime;
         // dd($matchesShortInfo);
     }
 
