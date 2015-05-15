@@ -1,12 +1,14 @@
-<?php namespace App\Http\Controllers;
+<?php
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ItemsWeb;
+use App\Repositories\MatchesMapperAll;
 use App\Repositories\SteamRepository as Steam;
 use Dota2Api\Api as Api;
-use Dota2Api\Mappers\MatchesMapperWeb;
-use Dota2Api\Mappers\MatchMapperDb;
-use App\Repositories\ItemsWeb;
 use Dota2Api\Mappers\ItemsMapperDb;
+use Dota2Api\Mappers\MatchMapperDb;
+use Dota2Api\Mappers\MatchMapperWeb;
 
 class ApiController extends Controller
 {
@@ -51,27 +53,32 @@ class ApiController extends Controller
      */
     public function getHistoryMatches($steamid = null)
     {
-
-        $matchesMapperWeb = new MatchesMapperWeb();
+        $startTime = microtime_float();
+        $matchesMapperWeb = new MatchesMapperAll();
         if (isset($steamid) !== null) {
             $matchesMapperWeb->setAccountId($steamid);
+            $matchesShortInfo = $matchesMapperWeb->load2();
+        } else {
+            $matchesShortInfo = $matchesMapperWeb->load();
         }
-        $matchesShortInfo = $matchesMapperWeb->load();
-        $matchesMapperDb = new MatchMapperDb();
-        foreach ($matchesShortInfo as $matchid => $match) {
-            $matchesMapperDb->save($match);
+        foreach ($matchesShortInfo as $matchid => $matchShortInfo) {
+            $matchMapper = new MatchMapperWeb($matchid);
+            $match = $matchMapper->load();
+            $mm = new MatchMapperDb();
+            $mm->save($match);
         }
-
+        $endTime = microtime_float();
+        echo $endTime - $startTime;
         // dd($matchesShortInfo);
     }
 
     public function getItemsWeb()
     {
-    	$itemsMapperWeb = new ItemsWeb();
-    	$itemsMapperWeb->setLanguage('zh');
-		$items = $itemsMapperWeb->load();
-		$itemsMapperDb = new itemsMapperDb();
-		$itemsMapperDb->save($items);
+        $itemsMapperWeb = new ItemsWeb();
+        $itemsMapperWeb->setLanguage('zh');
+        $items = $itemsMapperWeb->load();
+        $itemsMapperDb = new itemsMapperDb();
+        $itemsMapperDb->save($items);
     }
 
     public function createMap($matchid)
