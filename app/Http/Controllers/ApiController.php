@@ -7,8 +7,6 @@ use App\Repositories\MatchesMapperAll;
 use App\Repositories\SteamRepository as Steam;
 use Dota2Api\Api as Api;
 use Dota2Api\Mappers\ItemsMapperDb;
-use Dota2Api\Mappers\MatchMapperDb;
-use Dota2Api\Mappers\MatchMapperWeb;
 
 class ApiController extends Controller
 {
@@ -53,20 +51,8 @@ class ApiController extends Controller
      */
     public function getHistoryMatches($steamid = null)
     {
-        ini_set('max_execution_time', 0);
-        $matchesMapperWeb = new MatchesMapperAll();
-        if (isset($steamid) !== null) {
-            $matchesMapperWeb->setAccountId($steamid);
-            $matchesShortInfo = $matchesMapperWeb->load2();
-        } else {
-            $matchesShortInfo = $matchesMapperWeb->load();
-        }
-        foreach ($matchesShortInfo as $matchid => $matchShortInfo) {
-            $matchMapper = new MatchMapperWeb($matchid);
-            $match = $matchMapper->load();
-            $mm = new MatchMapperDb();
-            $mm->save($match, false);
-        }
+        \Queue::push('CurlMatchesQueue',['steamid' => $steamid]);
+        return 'Added to the queue!';
         // dd($matchesShortInfo);
     }
 
@@ -96,6 +82,12 @@ class ApiController extends Controller
         // if()
         $search_r = Steam::init($text);
         return $search_r;
+    }
+
+    public function test($job,$data)
+    {
+        File::append(app_path().'/tset.md',$data.PHP_EOL);
+        $job->delete();
     }
 
 }

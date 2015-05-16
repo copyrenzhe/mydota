@@ -45,7 +45,6 @@ class MatchesMapperAll extends MatchesMapperWeb
             }
 
             $request = new Request(self::STEAM_MATCHES_URL, $this->_getDataArray());
-
             $xml = $request->send();
             if (null === $xml) {
                 continue;
@@ -70,6 +69,7 @@ class MatchesMapperAll extends MatchesMapperWeb
                     }
                 }
             }
+
         } while ($this->_results_remaining > 0);
         return $matches;
     }
