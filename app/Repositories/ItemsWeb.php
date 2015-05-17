@@ -2,11 +2,12 @@
 namespace App\Repositories;
 
 use Dota2Api\Mappers\ItemsMapperWeb;
-use Dota2Api\Utils\Request;
 use Dota2Api\Models\Item;
+use Dota2Api\Utils\Request;
+
 /**
-* 
-*/
+ *
+ */
 class ItemsWeb extends ItemsMapperWeb
 {
     protected $_language;
@@ -39,13 +40,13 @@ class ItemsWeb extends ItemsMapperWeb
         if (null === $response) {
             return null;
         }
-        $itemsInfo = (array)($response->items);
+        $itemsInfo = (array) ($response->items);
         $itemsInfo = $itemsInfo['item'];
         $items = array();
         foreach ($itemsInfo as $itemInfo) {
-            $info = (array)$itemInfo;
+            $info = (array) $itemInfo;
             array_walk($info, function (&$v) {
-                $v = (string)$v;
+                $v = (string) $v;
             });
             $item = new item();
             $item->setArray($info);
@@ -53,7 +54,5 @@ class ItemsWeb extends ItemsMapperWeb
         }
         return $items;
     }
-    
-}
 
-?>
+}

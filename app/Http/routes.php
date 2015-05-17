@@ -22,43 +22,45 @@
  *      ad('30.33');
  *      ad(with(new stdClass)->foo = 'bar');
  *      ad(['name' => 'zhangsan', 'age' => 14]);
- *  
+ *
  *      //timers
  *      Anbu::timers()->start('test');
  *      sleep(1); // Do something interesting.
  *      Anbu::timers()->end('test', 'Completed doing something.');
- *  
+ *
  *      //db query
  *      \DB::table('anbu')->get();
- *  
+ *
  *      //log entries
  *      \Log::info('another message');
  *      \Log::error('wrong message');
- *  
+ *
  *      return View::make('hello');
  *  });
  */
 
 /**
  *  Queue list
- *  @example 
+ *  @example
  *  Route::get('/queue',function(){
- *  	Queue::push(function($job){
- *  		File::append(app_path().'/tset.md','welcom'.PHP_EOL);
- *  		$job->delete();
- *  	});
- *  	return 'job pushed';
+ *      Queue::push(function($job){
+ *          File::append(app_path().'/tset.md','welcom'.PHP_EOL);
+ *          $job->delete();
+ *      });
+ *      return 'job pushed';
  *  })
  */
 
-/*Route::get('mail',function(){
-	$data = ['name' => 'maple'];
-	Mail::send('emails.test',$data,function($message){
-		$message->to('copyrenzhe@163.com')->subject("welcome! It's a test");
-		$message->attach((public_path().'/css/all.css'));
-	});
-	return 'success';
-});*/
+/**
+ * Route::get('mail',function(){
+ *    $data = ['name' => 'maple'];
+ *    Mail::send('emails.test',$data,function($message){
+ *        $message->to('copyrenzhe@163.com')->subject("welcome! It's a test");
+ *        $message->attach((public_path().'/css/all.css'));
+ *    });
+ *    return 'success';
+ * });
+ */
 
 Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
@@ -66,15 +68,27 @@ Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
 Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@search']);
 
-Route::get('/history/{steamid?}', ['as' => 'api.gethistorymatches', 'uses' => 'ApiController@getHistoryMatches']);
+/**
+ * queue
+ */
+Route::group(['prefix' => 'queue'], function () {
+    $controller = 'ApiController@';
+    $resource = 'api';
+    #matches
+    Route::get('matches/{steamid?}', ['as' => $resource . 'gethistorymatches', 'uses' => $controller . 'getHistoryMatches']);
+    #items
+    Route::get('items', ['as' => $resource . 'getItemsWeb', 'uses' => $controller . 'getItemsWeb']);
+    Route::get('test',function(){
+    	return 'test';
+    });
 
-Route::get('/match/info/{matchid}',['as' => 'match.info', 'uses' => 'MatchController@info']);
+});
+
+Route::get('test', 'ApiController@test');
+
+Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info']);
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
-    'api' => 'ApiController',
 ]);
-
-
-

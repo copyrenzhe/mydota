@@ -2,11 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ItemsWeb;
-use App\Repositories\MatchesMapperAll;
 use App\Repositories\SteamRepository as Steam;
 use Dota2Api\Api as Api;
-use Dota2Api\Mappers\ItemsMapperDb;
 
 class ApiController extends Controller
 {
@@ -47,22 +44,23 @@ class ApiController extends Controller
     /**
      * get History of dota2
      * @param  long $steamid 64byte steamId or 32byte steamId
-     * @return array  Arraylist of matches history
+     * @return string
      */
     public function getHistoryMatches($steamid = null)
     {
-        \Queue::push('CurlMatchesQueue',['steamid' => $steamid]);
+        \Queue::push('CurlMatchesQueue', ['steamid' => $steamid]);
         return 'Added to the queue!';
         // dd($matchesShortInfo);
     }
 
+    /**
+     * update Items
+     * @return string
+     */
     public function getItemsWeb()
     {
-        $itemsMapperWeb = new ItemsWeb();
-        $itemsMapperWeb->setLanguage('zh');
-        $items = $itemsMapperWeb->load();
-        $itemsMapperDb = new itemsMapperDb();
-        $itemsMapperDb->save($items);
+        \Queue::push('CurlItemsQueue', ['language' => 'zh']);
+        return 'Added to the queue!';
     }
 
     public function createMap($matchid)
@@ -84,10 +82,15 @@ class ApiController extends Controller
         return $search_r;
     }
 
-    public function test($job,$data)
+    public function test()
     {
-        File::append(app_path().'/tset.md',$data.PHP_EOL);
-        $job->delete();
+        $playersMapperWeb = new \Dota2Api\Mappers\PlayersMapperWeb();
+        $playersInfo = $playersMapperWeb->addId('76561198134591399')->load();
+        foreach($playersInfo as $playerInfo) {
+            echo $playerInfo->get('avatar').'<br/>';
+            echo $playerInfo->get('profileurl').'<br/>';
+        }
+        dd($playersInfo);
     }
 
 }
