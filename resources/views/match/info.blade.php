@@ -25,7 +25,7 @@
         <table class="picks_bans">
             <tr>
                 <td style="vertical-align: top;">Bans:<br /><br />Picks:</td>
-                @foreach($picks_bans as $t => $team)
+                @foreach($data['picks_bans'] as $t => $team)
                     <td>
                     @foreach($team as $k_s=>$state)
                         @foreach($state as $pick_ban)
@@ -44,7 +44,7 @@
         <table class="slots">
             @foreach($data['detail'] as $k=> $team)
             <tr>
-                <td colsapn="14">
+                <td colspan="14">
                     <h2>
                         @if($k=='radiant')
                         天辉
@@ -57,6 +57,11 @@
                     </h2>
                 </td>
             </tr>
+            <tr>
+                <td colspan="14">
+                    杀:{{$team['total']['k']}},  死:{{ $team['total']['d'] }}, 钱:{{ $team['total']['gold'] }}, 对英雄伤害:{{ $team['total']['hdmg'] }}, 对塔伤害:{{ $team['total']['tdmg'] }}, 治疗:{{ $team['total']['heal'] }}
+                </td>
+            </tr>
             <tr class="thead">
                 <td class="left" colspan="2">
                     玩家
@@ -64,54 +69,53 @@
                 <td class="left" colspan="2">
                     英雄/等级
                 </td>
-                <td>K</td>
-                <td>D</td>
-                <td>A</td>
+                <td>
+                    KDA<br/>
+                    K/D/A
+                </td>
                 <td>Gold</td>
-                <td>LH</td>
-                <td>DN</td>
-                <td>GPM</td>
-                <td>XPM</td>
-                <td class="left">Items</td>
+                <td>正/反补</td>
+                <td>金钱/分钟</td>
+                <td>经验/分钟</td>
+                <td class="left">物品</td>
             </tr>
-            @foreach($team as $key => $slot)
-            @if($key%2==0)
+            @for($i =0 ;$i<=4;$i++)
+            @if($i%2==0)
                 <tr class="slot odd">
             @else
-                <tr class="slot odd">
+                <tr class="slot even">
             @endif
                     <td class="left">
-                        @if($slot['account_id'] != $data['anonymous'])
-                        <a href="{{ $players[$steam_id]->get('profileurl') }}"><img class="avatar" src=" {{ $players[$steam_id]->get('avatar') }} " alt="{{ $players[$steam_id]->get('personaname') }}"></a>
+                        @if($team[$i]['account_id'] != $data['anonymous'])
+                        <a href="{{ $players[$team[$i]['steam_id']]->get('profileurl') }}"><img class="avatar" src=" {{ $players[$team[$i]['steam_id']]->get('avatar') }} " alt="{{ $players[$team[$i]['steam_id']]->get('personaname') }}"></a>
                         @endif
                     </td>
-                    <tr class="left">
-                        @if($slot['account_id'] != $data['anonymous'])
-                        <a href="{{ $players[$steam_id]->get('profileurl') }}">{{ $players[$steam_id]->get('personaname') }}</a>
+                    <td class="left">
+                        @if($team[$i]['account_id'] != $data['anonymous'])
+                        <a href="{{ $players[$team[$i]['steam_id']]->get('profileurl') }}">{{ $players[$team[$i]['steam_id']]->get('personaname') }}</a>
                         @else
                         匿名
                         @endif
-                    </tr>
-                    <td><img src="{{ $heroes->get_img_url_by_id($slot->get('hero_id')) }}" alt="" /></td>
-                    <td class="left"><strong>{{ $heroes->get_field_by_id($slot->get('hero_id'), 'localized_name') }}</strong></td>
-                    <td>{{ $slot['level'] }}</td>
-                    <td>{{ $slot['kills'] }}</td>
-                    <td>{{ $slot['deaths'] }}</td>
-                    <td>{{ $slot['assists'] }}</td>
-                    <td>{{ $slot['gold'] }}k</td>
-                    <td>{{ $slot['last_hits'] }}</td>
-                    <td>{{ $slot['denies'] }}</td>
-                    <td>{{ $slot['gold_per_min'] }}</td>
-                    <td>{{ $slot['xp_per_min'] }}</td>
+                    </td>
+                    <td><img src="{{ $heroes->getImgUrlById($team[$i]['hero_id']) }}" alt="" /></td>
+                    <td class="left"><strong>{{ $heroes->getFieldById($team[$i]['hero_id'], 'localized_name') }}/{{ $team[$i]['level'] }}</strong></td>
+                    <td>{{ $team[$i]['kda'] }}<br/>
+                        {{ $team[$i]['k'] }}/{{ $team[$i]['d'] }}/{{ $team[$i]['a'] }}
+                    </td>
+                    <td>{{ $team[$i]['gold'] }}k</td>
+                    <td>{{ $team[$i]['lh'] }}/{{ $team[$i]['dn'] }}</td>
+                    <td>{{ $team[$i]['gpm'] }}</td>
+                    <td>{{ $team[$i]['xpm'] }}</td>
                     <td class="left">
-                        @for($i=0;$i<=5;$i++)
-                            @if ($slot['item_'.$i]!=$data['empty_item_id'])
-                            <img src="{{ $items->getImgUrlById($slot['item_'.$i]) }}" alt="" />
+                        @for($j=0;$j<=5;$j++)
+                            @if ($team[$i]['item_'.$j]!=$data['empty_item_id'])
+                            <img src="{{ $items->getImgUrlById($team[$i]['item_'.$j]) }}" alt="" />
                             @endif
                         @endfor
                     </td>
                 </tr>
-            @endforeach
+            @endfor
+
             @endforeach
         </table>
     </div>
