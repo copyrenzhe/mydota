@@ -84,11 +84,14 @@ Route::group(['prefix' => 'queue'], function () {
 
 });
 
-Route::get('test', 'ApiController@test');
 
-Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info']);
+Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info'])
+->where('matchid','[0-9]+');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('test', 'ApiController@test');
+
