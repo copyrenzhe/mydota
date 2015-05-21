@@ -74,19 +74,20 @@ Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@sea
 Route::group(['prefix' => 'queue'], function () {
     $controller = 'ApiController@';
     $resource = 'api';
-    #matches
-    Route::get('matches/{steamid?}', ['as' => $resource . 'gethistorymatches', 'uses' => $controller . 'getHistoryMatches']);
+    #Playermatches
+    Route::get('matches/{steamid}', ['as' => $resource . 'getPlayerMatches', 'uses' => $controller . 'getPlayerMatches'])
+    ->where('steamid', '[0-9]+');
     #items
     Route::get('items', ['as' => $resource . 'getItemsWeb', 'uses' => $controller . 'getItemsWeb']);
-    Route::get('test',function(){
-    	return 'test';
-    });
-
+    #heros
+    Route::get('heroes', ['as' => $resource . 'getHeroesWeb', 'uses' => $controller . 'getHeroesWeb']);
+    #matches
+    Route::get('history/matches/{skill}', ['as' => $resource . 'getHistoryMatches', 'uses' => $controller . 'getHistoryMatches'])
+    ->where('skill', '[0-3]');
 });
 
-
 Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info'])
-->where('matchid','[0-9]+');
+    ->where('matchid', '[0-9]+');
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
@@ -94,4 +95,3 @@ Route::controllers([
 ]);
 
 Route::get('test', 'ApiController@test');
-

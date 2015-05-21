@@ -2,8 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\match;
 use App\Repositories\SteamRepository as Steam;
-use Dota2Api\Api as Api;
 
 class ApiController extends Controller
 {
@@ -42,15 +42,33 @@ class ApiController extends Controller
     }
 
     /**
-     * get History of dota2
+     * get Player's matches histroy of dota2
      * @param  long $steamid 64byte steamId or 32byte steamId
      * @return string
      */
-    public function getHistoryMatches($steamid = null)
+    public function getPlayerMatches($steamid = null)
     {
-        \Queue::push('CurlMatchesQueue', ['steamid' => $steamid]);
+        \Queue::push('CurlPlayerMatchesQueue', ['steamid' => $steamid]);
         return 'Added to the queue!';
         // dd($matchesShortInfo);
+    }
+
+    public function getHistoryMatches($skill)
+    {
+        $start_match_id = match::ofSkill($skill)->orderBy('match_id', 'desc')->pluck('match_id');
+        // \Queue::push('CurlHistoryMatchesQueue', ['skill' => $skill, 'start_match_id' => $start_match_id]);
+        $matchesMapperWeb = new \App\Repositories\MatchesMapperAll();
+        $matchesMapperWeb->setSkill($skill);
+        // $matchesMapperWeb->setStartAtMatchId($start_match_id);
+        $matchesShortInfo = $matchesMapperWeb->load2($start_match_id);
+        dd($matchesShortInfo);
+        foreach ($matchesShortInfo as $matchid => $matchShortInfo) {
+            $matchMapper = new \Dota2Api\Mappers\MatchMapperWeb($matchid);
+            $match = $matchMapper->load();
+            $mm = new \App\Repositories\MatchesDb();
+            // $mm->save($match, false);
+        }
+        // return 'History matches Added to the queue!';
     }
 
     /**
@@ -61,6 +79,13 @@ class ApiController extends Controller
     {
         \Queue::push('CurlItemsQueue', ['language' => 'zh']);
         return 'Added to the queue!';
+    }
+
+    public function getHeroesWeb()
+    {
+        //\Queue::push('CurlHerosQueue', ['language' => 'zh']);
+        //return 'Added to the queue!';
+
     }
 
     public function createMap($matchid)
@@ -86,9 +111,9 @@ class ApiController extends Controller
     {
         $playersMapperWeb = new \Dota2Api\Mappers\PlayersMapperWeb();
         $playersInfo = $playersMapperWeb->addId('76561198134591399')->load();
-        foreach($playersInfo as $playerInfo) {
-            echo $playerInfo->get('avatar').'<br/>';
-            echo $playerInfo->get('profileurl').'<br/>';
+        foreach ($playersInfo as $playerInfo) {
+            echo $playerInfo->get('avatar') . '<br/>';
+            echo $playerInfo->get('profileurl') . '<br/>';
         }
         dd($playersInfo);
     }

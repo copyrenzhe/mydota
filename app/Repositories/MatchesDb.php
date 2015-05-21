@@ -2,19 +2,19 @@
 namespace App\Repositories;
 
 use Dota2Api\Mappers\MatchMapperDb;
-use Dota2Api\Utils\Db;
-use Dota2Api\Models\Match;
 use Dota2Api\Mappers\PlayersMapperWeb;
+use Dota2Api\Models\Match;
 use Dota2Api\Models\Player;
+use Dota2Api\Utils\Db;
 
 /**
-* 
-*/
+ *
+ */
 class MatchesDb extends MatchMapperDb
 {
-	
-	/**
-	 * extend MatchMapperDb@insert
+
+    /**
+     * extend MatchMapperDb@insert
      * @param $match
      */
     public function insert(Match $match)
@@ -24,24 +24,22 @@ class MatchesDb extends MatchMapperDb
         if ($match->get('radiant_team_id')) {
             $db->insertPDO(Db::realTablename('teams'), array(
                 'id' => $match->get('radiant_team_id'),
-                'name' => $match->get('radiant_name')
+                'name' => $match->get('radiant_name'),
             ));
         }
-
 
         if ($match->get('dire_team_id')) {
             $db->insertPDO(Db::realTablename('teams'), array(
                 'id' => $match->get('dire_team_id'),
-                'name' => $match->get('dire_name')
+                'name' => $match->get('dire_name'),
             ));
         }
-
 
         // save common match info
         $db->insertPDO(Db::realTablename('matches'), $match->getDataArray());
         // save accounts
         foreach ($slots as $slot) {
-            if ((int)$slot->get('account_id') !== Player::ANONYMOUS) {
+            if ((int) $slot->get('account_id') !== Player::ANONYMOUS) {
                 $playersMapperWeb = new PlayersMapperWeb();
                 $account_id = $slot->get('account_id');
                 $steamid = Player::convertId($account_id);
@@ -54,7 +52,7 @@ class MatchesDb extends MatchMapperDb
                     'steamid' => $steamid,
                     'personaname' => $personaname,
                     'avatar' => $avatar,
-                    'profileurl' => $profileurl
+                    'profileurl' => $profileurl,
                 ));
             }
         }
@@ -82,7 +80,7 @@ class MatchesDb extends MatchMapperDb
                 $db->insertPDO(Db::realTablename('additional_units'), $additionalUnit);
             }
         }
-        if ((int)$match->get('game_mode') === match::CAPTAINS_MODE) {
+        if ((int) $match->get('game_mode') === match::CAPTAINS_MODE) {
             $picksBans = $match->getAllPicksBans();
             $data = array();
             foreach ($picksBans as $pickBan) {
@@ -117,23 +115,23 @@ class MatchesDb extends MatchMapperDb
             array('match_id' => $match->get('match_id'))
         );
         foreach ($slots as $slot) {
-        	if ((int)$slot->get('account_id') !== Player::ANONYMOUS) {
-	        	$playersMapperWeb = new PlayersMapperWeb();
-	            $account_id = $slot->get('account_id');
-	            $steamid = Player::convertId($account_id);
-	            $playersInfo = $playersMapperWeb->addId($steamid)->load();
-	            $personaname = $playersInfo[$steamid]->get('personaname');
-	            $avatar = $playersInfo[$steamid]->get('avatar');
-	            $profileurl = $playersInfo[$steamid]->get('profileurl');
-	            // update accounts
-	            $db->updatePDO(Db::realTablename('users'), array(
-	                'account_id' => $account_id,
-	                'steamid' => $steamid,
-	                'personaname' => $personaname,
-	                'avatar' => $avatar,
-	                'profileurl' => $profileurl
-	            ), array('account_id' => $account_id));
-        	}
+            if ((int) $slot->get('account_id') !== Player::ANONYMOUS) {
+                $playersMapperWeb = new PlayersMapperWeb();
+                $account_id = $slot->get('account_id');
+                $steamid = Player::convertId($account_id);
+                $playersInfo = $playersMapperWeb->addId($steamid)->load();
+                $personaname = $playersInfo[$steamid]->get('personaname');
+                $avatar = $playersInfo[$steamid]->get('avatar');
+                $profileurl = $playersInfo[$steamid]->get('profileurl');
+                // update accounts
+                $db->updatePDO(Db::realTablename('users'), array(
+                    'account_id' => $account_id,
+                    'steamid' => $steamid,
+                    'personaname' => $personaname,
+                    'avatar' => $avatar,
+                    'profileurl' => $profileurl,
+                ), array('account_id' => $account_id));
+            }
             // update slots
             if (!$lazy) {
                 $db->updatePDO(
@@ -145,5 +143,3 @@ class MatchesDb extends MatchMapperDb
         }
     }
 }
-
-?>

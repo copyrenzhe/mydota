@@ -35,7 +35,7 @@ class MatchesMapperAll extends MatchesMapperWeb
      * extends \Dota2Api\Mappers\MatchesMapperWeb@load Get all matches
      * @return [type] [description]
      */
-    public function load2()
+    public function load2($MatchIdDb)
     {
         $matches = array();
         $startMatchId = '';
@@ -64,8 +64,12 @@ class MatchesMapperAll extends MatchesMapperWeb
                                 $match->addSlot($slot);
                             }
                         }
-                        $matches[$match->get('match_id')] = $match;
-                        $startMatchId = $match->get('match_id');
+                        if ($match->get('match_id') > $MatchIdDb) {
+                            $startMatchId = $match->get('match_id');
+                            $matches[$match->get('match_id')] = $match;
+                        } else {
+                            $startMatchId = $MatchIdDb;
+                        }
                     }
                 }
             }
