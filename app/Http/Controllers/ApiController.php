@@ -81,11 +81,14 @@ class ApiController extends Controller
         return 'Added to the queue!';
     }
 
+    /**
+     * update Heroes
+     * @return string
+     */
     public function getHeroesWeb()
     {
-        //\Queue::push('CurlHerosQueue', ['language' => 'zh']);
-        //return 'Added to the queue!';
-
+        \Queue::push('CurlHeroesQueue', ['language' => 'zh']);
+        return 'Added to the queue!';
     }
 
     public function createMap($matchid)
@@ -102,7 +105,6 @@ class ApiController extends Controller
     public function search($text)
     {
         // Steam::init('lamp');
-        // if()
         $search_r = Steam::init($text);
         return $search_r;
     }
