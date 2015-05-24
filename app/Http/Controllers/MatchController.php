@@ -75,6 +75,8 @@ class MatchController extends Controller
                 for ($i = 0; $i <= 5; $i++) {
                     $detail[$k][$key]['item_' . $i] = $slot->get('item_' . $i);
                 }
+                $detail[$k][$key]['abilities'] = $slot->getAbilitiesUpgrade();
+                $detail[$k][$key]['additional_unit'] = $slot->getAdditionalUnitItems();
                 //total info
                 $detail[$k]['total']['level'] += $slot->get('level');
                 $detail[$k]['total']['k'] += $slot->get('kills');

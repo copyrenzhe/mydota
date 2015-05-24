@@ -114,6 +114,14 @@
                         @endfor
                     </td>
                 </tr>
+                <tr class="slot even ?>">
+                    <td></td>
+                    <td class="left abilities" colspan="13">
+                        @foreach($team[$i]['abilities'] as $a_u)
+                            <img class="ability" width="33" height="33" src="{{ $abilities->getImgUrlById($a_u['ability']) }}" title="{{ ucwords(str_replace('_', ' ', $abilities->getFieldById($a_u['ability'], 'name'))).' Time: '.gmdate('H:i:s', $a_u['time']).' Level: '.$a_u['level'] }}" />
+                        @endforeach
+                    </td>
+                </tr>
             @endfor
 
             @endforeach
