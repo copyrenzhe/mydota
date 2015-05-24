@@ -53,22 +53,16 @@ class ApiController extends Controller
         // dd($matchesShortInfo);
     }
 
+    /**
+     * get History matches sort by skill
+     * @param  int $skill 0:any 1:normal 2:hard 3:very hard
+     * @return string 
+     */
     public function getHistoryMatches($skill)
     {
         $start_match_id = match::ofSkill($skill)->orderBy('match_id', 'desc')->pluck('match_id');
-        // \Queue::push('CurlHistoryMatchesQueue', ['skill' => $skill, 'start_match_id' => $start_match_id]);
-        $matchesMapperWeb = new \App\Repositories\MatchesMapperAll();
-        $matchesMapperWeb->setSkill($skill);
-        // $matchesMapperWeb->setStartAtMatchId($start_match_id);
-        $matchesShortInfo = $matchesMapperWeb->load2($start_match_id);
-        dd($matchesShortInfo);
-        foreach ($matchesShortInfo as $matchid => $matchShortInfo) {
-            $matchMapper = new \Dota2Api\Mappers\MatchMapperWeb($matchid);
-            $match = $matchMapper->load();
-            $mm = new \App\Repositories\MatchesDb();
-            // $mm->save($match, false);
-        }
-        // return 'History matches Added to the queue!';
+        \Queue::push('CurlHistoryMatchesQueue', ['skill' => $skill, 'start_match_id' => $start_match_id]);
+        return 'History matches Added to the queue!';
     }
 
     /**
@@ -91,6 +85,11 @@ class ApiController extends Controller
         return 'Added to the queue!';
     }
 
+    /**
+     * create the map of the game
+     * @param  int $matchid 
+     * @return string    the html
+     */
     public function createMap($matchid)
     {
         $matchMapperWeb = new \Dota2Api\Mappers\MatchMapperWeb($matchid);
@@ -102,6 +101,11 @@ class ApiController extends Controller
         imagedestroy($canvas);
     }
 
+    /**
+     * search from steam
+     * @param  string $text user's name
+     * @return array  result of search
+     */
     public function search($text)
     {
         // Steam::init('lamp');
