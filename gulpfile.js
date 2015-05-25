@@ -17,8 +17,12 @@ elixir(function(mix) {
     mix.styles([
     	'libs/global.css',
     	'libs/heropedia.css',
-    	'app.css',
     	'match.css'
-    ],null,'resources/css');
+    ],'public/css/test.css','resources/css');
+
+    mix.styles([
+    	'app.css',
+    	'index.css'
+    ],'public/css/index.css','resources/css');
 
 });
