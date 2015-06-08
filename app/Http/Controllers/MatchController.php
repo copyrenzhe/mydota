@@ -92,6 +92,7 @@ class MatchController extends Controller
                 $detail[$k]['total']['heal'] += $slot->get('hero_healing');
             }
         }
+        // dd($detail);
         $data['detail'] = $detail;
         return view('match.info', compact('match', 'players', 'heroes', 'items', 'abilities', 'mods', 'lobbies', 'regions', 'data'));
     }
