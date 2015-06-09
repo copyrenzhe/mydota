@@ -13,6 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less('app.less','resources/css');
+    mix.less('index.less','resources/css/index.css','resource/assets/less');
 
     mix.styles([
     	'libs/global.css',
