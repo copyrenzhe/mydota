@@ -7,7 +7,7 @@
 	<title>MyDotA</title>
 
 	<link href="{{ asset('/css/index.css') }}" rel="stylesheet">
-
+	<script type="text/javascript" src="{{ asset('/js/app.js')}}"></script>
 	<!-- Fonts -->
 	<link href='//fonts.useso.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 

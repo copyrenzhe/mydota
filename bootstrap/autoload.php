@@ -29,7 +29,8 @@ require __DIR__.'/../api-key.php';			//引入dota2 api-key
 |
 */
 
-$compiledPath = __DIR__.'/../vendor/compiled.php';
+// $compiledPath = __DIR__.'/../vendor/compiled.php';
+$compiledPath = __DIR__.'/cache/compiled.php';
 
 if (file_exists($compiledPath))
 {

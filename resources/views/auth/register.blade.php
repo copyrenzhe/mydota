@@ -3,7 +3,8 @@
 @section('content')
 <div class="container">
 	<div class="register">
-		<h2>注册MyDotA</h2>
+		<h2 class="mb10 tc">注册MyDotA</h2>
+		<hr class="mb10">
 		<div class="panel-body">
 			@if (count($errors) > 0)
 				<div class="alert alert-danger">
@@ -66,7 +67,7 @@
 
 				<div class="form-group">
 					<div class="form-box">
-						<button type="submit" class="btn btn-primary">
+						<button type="submit" class="btn btn-primary width-100">
 							注册
 						</button>
 					</div>

@@ -5,11 +5,10 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.*",
+		"laravel/framework": "5.1.*",
 		"kronusme/dota2-api": "dev-master",
 		"wittiws/phpquery": "dev-master",
-		"pda/pheanstalk": " 3.0.*@dev",
-		"daylerees/anbu": "dev-master"
+		"pda/pheanstalk": " 3.0.*@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
