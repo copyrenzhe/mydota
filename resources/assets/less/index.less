@@ -1,0 +1,55 @@
+@import "include/variables.less";
+@import "include/mixins.less";
+
+.container{
+    
+    /* vars */
+    @searchInputWidth:   400px;
+    @searchButtonWidth:  100px;
+    @searchBoxWidth:    @searchInputWidth+@searchButtonWidth;
+    @searchBoxMargin :   150px auto;
+    @searchInputBorder:   1px solid #d8d8d8;
+    @searchFontSize : 16px;
+    @registerMarginTop : (floor( 15 * 5 + (@font-size-base*1.42 + 5 + @input-height-base) * 4+ @input-height-base + 16*1.42 + 10 + 10 + 50*2))/2;
+
+     .search-box{
+        width: @searchBoxWidth;
+        margin: @searchBoxMargin;
+        .search{
+            width: @searchInputWidth;
+            padding: 9px 7px;
+            font: @searchFontSize arial;
+            float: left;
+            border: @searchInputBorder;
+            border-bottom: 1px solid #ccc;
+            &:focus{
+                  border-color: #66afe9;
+                  outline: 0;
+                  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            }
+        }
+    }
+
+    .index-search{
+        line-height: 38px;
+        background-color: #38f;
+        padding: 0px;
+        border: 0;
+        width: @searchButtonWidth;
+        color: white;
+        font-size: @searchFontSize;
+        height: 38px;
+    }
+
+    .register{
+        width: 380px;
+        padding: 50px;
+        .border-radius(10px);
+        background: rgba(255,255,255,.6);
+        position: absolute;
+        left: 50%;
+        margin-left: -240px;
+        margin-top: -@registerMarginTop;
+        top: 50%;
+    }
+}
