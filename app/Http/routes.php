@@ -66,7 +66,10 @@ Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
 Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
-Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@search']);
+Route::get('/heros/{hero_name?}', ['as'=>'home.heros'], 'uses'=>'HomeController@heros');
+
+// Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@search']);
+Route::get('/search/{text}',['as' => 'home.search', 'uses' => 'HomeController@search']);
 
 /**
  * queue
