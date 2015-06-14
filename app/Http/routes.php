@@ -85,6 +85,16 @@ Route::group(['prefix' => 'hero'],function(){
 });
 
 /**
+ * items
+ */
+Route::group(['prefix'=>'item'],function(){
+    $controller = 'ItemController@';
+    $resource = 'item.';
+    #item list
+    Route::get('index',['as'=>$resource.'index','uses'=>$controller.'index']);
+});
+
+/**
  * queue
  */
 Route::group(['prefix' => 'queue'], function () {

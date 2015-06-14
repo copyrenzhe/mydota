@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\Heroes;
 use Illuminate\Http\Request;
+use App\Models\Hero;
 
 class HeroController extends Controller {
 
@@ -14,10 +15,10 @@ class HeroController extends Controller {
 	 */
 	public function index()
 	{
-		$heroes = new Heroes();
-		$heroes->setHeroName('nevermore');
-		$heroesInfo = $heroes->load();
-		dd($heroesInfo);
+		$hero = new Heroes;
+		$hero->setHeroName('bane');
+		$r = $hero->load();
+		dd($r);
 	}
 
 

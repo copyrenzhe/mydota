@@ -23,7 +23,7 @@ class Heroes
     {   
         $url = self::URL.$this->_heroName;
         $html = $this->send($url);
-        $pattern = '/<span style\=\"font\-size\:10px\;color\:\#ccc\;width\:320px\;\">(.*?)<\/span>.*?var health_add \= (.*?)\*19.*?var mana_add \= (.*?)\*13.*?var armor_add \= (.*?)\/7.*?var health_init \= 150\+(\d+)\*19.*?var mana_init \= (\d+)\*13.*?var attack_min \= (\d+).*?var attack_max \= (\d+).*?var armor_init \= \-1\+(\d+)\/7.*?\'DOTA\_ATTRIBUTE\_(.*?)\' \=\= /s';
+        $pattern = '/<span style\=\"font\-size\:10px\;color\:\#ccc\;width\:320px\;\">(.*?)<\/span>.*?var health_add \= (.*?)\*19.*?var mana_add \= (.*?)\*13.*?var armor_add \= (.*?)\/7.*?var health_init \= 150\+(\d+)\*19.*?var mana_init \= (\d+)\*13.*?var attack_min \= (\d+).*?var attack_max \= (\d+).*?var armor_init \= (.*?)\+(\d+)\/7.*?\'DOTA\_ATTRIBUTE\_(.*?)\' \=\=.*?<span id\=\"armor\"><\/span><\/div>.*?<div class\=\"hero\-stats\">.*?<span>(\d+)<\/span>.*?<span id\=\"mana\"><\/span><\/div>.*?<div class\=\"hero\-stats\">.*?<span>(.*?)<\/span>.*?<span>(.*?)<\/span>/s';
         preg_match($pattern, $html, $matchs);
         $r = array(
             'type' => del_html($matchs[1]),
@@ -34,8 +34,12 @@ class Heroes
             'intellect_init' => $matchs[6],
             'attack_min' => $matchs[7],
             'attack_max' => $matchs[8],
-            'agility_init' => $matchs[9],
-            'attribute' => strtolower($matchs[10]),
+            'armor_init' => $matchs[9],
+            'agility_init' => $matchs[10],
+            'attribute' => strtolower($matchs[11]),
+            'speed' => $matchs[12],
+            'turn_speed' => $matchs[13],
+            'front_cradle' => $matchs[14],
             );
         return $r;
     }

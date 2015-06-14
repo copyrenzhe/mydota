@@ -16,12 +16,13 @@ class CreateHerosTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('local_name');
+			$table->string('localized_name');
 			$table->enum('attribute',array('strength,agility,intellect'));
 			$table->string('type');
 			$table->tinyInteger('strength_init');
 			$table->tinyInteger('agility_init');
 			$table->tinyInteger('intellect_init');
+			$table->string('armor_init');
 			$table->float('strength_add');
 			$table->float('agility_add');
 			$table->float('intellect_add');

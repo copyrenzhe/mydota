@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\match;
+use App\Models\Match;
 use App\Repositories\SteamRepository as Steam;
 
 class ApiController extends Controller
@@ -60,7 +60,7 @@ class ApiController extends Controller
      */
     public function getHistoryMatches($skill)
     {
-        $start_match_id = match::ofSkill($skill)->orderBy('match_id', 'desc')->pluck('match_id');
+        $start_match_id = Match::ofSkill($skill)->orderBy('match_id', 'desc')->pluck('match_id');
         \Queue::push('CurlHistoryMatchesQueue', ['skill' => $skill, 'start_match_id' => $start_match_id]);
         return 'History matches Added to the queue!';
     }
