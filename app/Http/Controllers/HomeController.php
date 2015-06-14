@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Dota2Api\Mappers\HeroesMapper;
+
 
 class HomeController extends Controller {
 
@@ -35,21 +35,6 @@ class HomeController extends Controller {
 		return view('home');
 	}
 
-	/**
-	 * Hero List
-	 * @param string $hero_name 
-	 * 
-	 */
-	public function heros($hero_name)
-	{
-		if(!$hero_name){
-			$heroesMapper = new Dota2Api\Mappers\HeroesMapper();
-			$heroes = $heroesMapper->load();
-			return view('hero_list');
-		} else{
-
-		}
-	}
 
 	/**
 	 * search player name

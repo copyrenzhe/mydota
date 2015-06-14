@@ -12,6 +12,8 @@ class CurlHeroesQueue
         foreach ($result['result']['heroes'] as $key => $value) {
             $value['name'] = substr($value['name'], 14);
             $result['result']['heroes'][$key] = $value;
+            $heroInfo = http_curl('http://dotamax.com/hero/detail/'.$value['name']);
+            
         }
         $heroList['heroes'] = $result['result']['heroes'];
         update_dota2_json('heroes', $heroList);
