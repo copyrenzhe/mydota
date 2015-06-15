@@ -16,7 +16,7 @@ class CreateAbilityTable extends Migration
             $table->increments('id');
             $table->string('dname');
             $table->string('name');
-            $table->text('affectes');
+            $table->text('affects');
             $table->text('desc');
             $table->text('notes');
             $table->text('dmg');
