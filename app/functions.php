@@ -44,7 +44,7 @@
 	function update_dota2_json($path,$array){
 		$json = json_encode($array);
         chmod(dirname(__FILE__), 0777);
-        $file = fopen('../vendor/kronusme/dota2-api/data/' . $path.'.json', 'w+');
+        $file = fopen(__DIR__.'/../vendor/kronusme/dota2-api/data/' . $path.'.json', 'w+');
         fwrite($file, $json);
         fclose($file);
         unset($file);

@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+
+
 class HomeController extends Controller {
 
 	/*
@@ -31,6 +33,17 @@ class HomeController extends Controller {
 	public function index()
 	{
 		return view('home');
+	}
+
+
+	/**
+	 * search player name
+	 * @param string $text player's name
+	 * 
+	 */
+	public function search($text)
+	{
+		
 	}
 
 }
