@@ -15,8 +15,9 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
-		$itemDb = new ItemsDb();
-        $itemDb->update();
+		$result = http_curl('http://www.dota2.com/jsfeed/heropediadata?feeds=abilitydata&l=schinese');
+		$r = json_decode($result);
+		dd($r);
 	}
 
 }

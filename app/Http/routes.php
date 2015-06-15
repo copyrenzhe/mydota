@@ -79,6 +79,7 @@ Route::group(['prefix' => 'hero'],function(){
     $resource = 'hero.';
     #hero list
     Route::get('index',['as'=>$resource . 'index','uses'=>$controller.'index']);
+    Route::get('lists',['as'=>$resource . 'lists','uses'=>$controller.'lists']);
     #hero info
     Route::get('info/{hero_name}',['uses'=>$controller.'info'])
     ->where('hero_name','w+');
@@ -93,6 +94,7 @@ Route::group(['prefix'=>'item'],function(){
     #item list
     Route::get('index',['as'=>$resource.'index','uses'=>$controller.'index']);
 });
+
 
 /**
  * queue

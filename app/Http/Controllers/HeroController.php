@@ -21,5 +21,12 @@ class HeroController extends Controller {
 		dd($r);
 	}
 
+	public function lists()
+	{
+		$result = http_curl('http://www.dota2.com/jsfeed/heropediadata?feeds=herodata&l=schinese');
+		$r = json_decode($result);
+		dd($r);
+	}
+
 
 }
