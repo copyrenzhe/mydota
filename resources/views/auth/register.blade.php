@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<div class="register">
+	<div class="register account-box">
 		<h2 class="mb10 tc">注册MyDotA</h2>
 		<hr class="mb10">
 		<div class="panel-body">
@@ -39,7 +39,7 @@
 							<i class="glyphicon glyphicon-envelope">
 			                </i>
 						</div>
-						<input type="email" class="form-control" name="email" value="{{ old('email') }}">
+						<input type="text" class="form-control" name="email" value="{{ old('email') }}">
 					</div>
 				</div>
 

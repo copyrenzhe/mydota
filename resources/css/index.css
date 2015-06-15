@@ -50,7 +50,7 @@
   font-size: 16px;
   height: 38px;
 }
-.container .register {
+.container .account-box {
   width: 380px;
   padding: 50px;
   -webkit-border-radius: 10px;
@@ -63,8 +63,13 @@
   position: absolute;
   left: 50%;
   margin-left: -240px;
-  margin-top: -243.5px;
   top: 50%;
+}
+.container .register {
+  margin-top: -243.5px;
+}
+.container .login {
+  margin-top: -194px;
 }
 
 /*# sourceMappingURL=index.css.map */

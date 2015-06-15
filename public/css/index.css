@@ -860,6 +860,10 @@ html {
 .tr {
   text-align: right;
 }
+/* width */
+.width-100 {
+  width: 100%;
+}
 code,
 kbd,
 pre,
@@ -2193,7 +2197,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   text-align: center;
   vertical-align: middle;
   -ms-touch-action: manipulation;
-      touch-action: manipulation;
+  touch-action: manipulation;
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
@@ -2786,7 +2790,7 @@ label,
   font-size: 16px;
   height: 38px;
 }
-.container .register {
+.container .account-box {
   width: 380px;
   padding: 50px;
   -webkit-border-radius: 10px;
@@ -2799,8 +2803,13 @@ label,
   position: absolute;
   left: 50%;
   margin-left: -240px;
-  margin-top: -243.5px;
   top: 50%;
+}
+.container .register {
+  margin-top: -243.5px;
+}
+.container .login {
+  margin-top: -194px;
 }
 
 /*# sourceMappingURL=index.css.map */
