@@ -17,7 +17,7 @@ class CreateHerosTable extends Migration {
 			$table->increments('id');
 			$table->string('name');		//antimage
 			$table->string('dname');	//敌法师
-			$table->enum('pa',array('str,agi,int'));		//agi
+			$table->enum('pa',array('str','agi','int'));		//agi
 			$table->string('u');		//Anti-Mage
 			$table->string('droles');	//核心 - 逃生
 			$table->tinyInteger('str_b');	//base strength

@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\HeroDb;
+use App\Repositories\AbilityDb;
 use Illuminate\Http\Request;
 use App\Models\Hero;
 
@@ -19,11 +20,10 @@ class HeroController extends Controller {
 		$hero->update();
 	}
 
-	public function lists()
+	public function ability()
 	{
-		$result = http_curl('http://www.dota2.com/jsfeed/heropediadata?feeds=herodata&l=schinese');
-		$r = json_decode($result);
-		dd($r);
+		$ability = new AbilityDb();
+		$ability->update();
 	}
 
 

@@ -79,7 +79,7 @@ Route::group(['prefix' => 'hero'],function(){
     $resource = 'hero.';
     #hero list
     Route::get('index',['as'=>$resource . 'index','uses'=>$controller.'index']);
-    Route::get('lists',['as'=>$resource . 'lists','uses'=>$controller.'lists']);
+    Route::get('ability',['as'=>$resource . 'ability','uses'=>$controller.'ability']);
     #hero info
     Route::get('info/{hero_name}',['uses'=>$controller.'info'])
     ->where('hero_name','w+');

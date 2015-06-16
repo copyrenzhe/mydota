@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
+use App\Models\Item;
 use App\Repositories\ItemsDb;
 use App\Repositories\AbilityDb;
 use Illuminate\Http\Request;
@@ -16,8 +16,13 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
-		$ability = new AbilityDb();
-		$ability->update();
+		$itemSecret = Item::ofType('secret_shop')->get();
+		$itemComponent = Item::ofType('component')->get();
+		$itemConsumable = Item::ofType('consumable')->get();
+		$itemRare = Item::ofType('rare')->get();
+		$itemEpic = Item::ofType('epic')->get();
+		$itemArtifact = Item::ofType('artifact')->get();
+		// return view('item',compact('itemObj'));
 	}
 
 }

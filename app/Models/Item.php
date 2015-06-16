@@ -8,5 +8,9 @@ class Item extends Model {
 	public $timestamps = false;
 	public $incrementing = false;
 	//
+    public function scopeofType($query,$type)
+    {
+        return $query->where('id','<','500')->where('qual','=',$type);
+    }
 
 }
