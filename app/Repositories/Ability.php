@@ -37,5 +37,4 @@ Class Ability
     }
 }
 
-
 ?>
