@@ -1,6 +1,6 @@
 <?php
 
-use App\Repositories\Heroes;
+use App\Repositories\HeroDb;
 use App\Models\Hero;
 
 /**
@@ -17,18 +17,10 @@ class CurlHeroesQueue
             $r = array();
             $value['name'] = substr($value['name'], 14);
             $result['result']['heroes'][$key] = $value;
-            $hero = new Heroes();
-            $hero->setHeroName($value['name']);
-            $r = $hero->load();
-            $r['name'] = $value['name'];
-            $r['localized_name'] = $value['localized_name'];
 
-            if(Hero::where('name','=',$r['name'])->first()){
-                Hero::where('name','=',$r['name'])->update($r);
-            }else{
-                Hero::create($r);
-            }
         }
+        $heroDb = new HeroDb();
+        $heroDb->update();
         $heroList['heroes'] = $result['result']['heroes'];
         update_dota2_json('heroes', $heroList);
         $job->delete();

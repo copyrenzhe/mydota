@@ -7,6 +7,6 @@ class Hero extends Model {
 	//
 	protected $table = 'heros';
 	public $timestamps = false;
-	protected $fillable = ['name','localized_name','type','attribute','strength_add','intellect_add','agility_add','strength_init','intellect_init','attack_min','attack_max','agility_init','speed','turn_speed','front_cradle'];
+	protected $fillable = array('name','dname','pa','u','droles','str_b','agi_b','int_b','armor','str_g','agi_g','int_g','dmg_min','dmg_max','ms','dac');
 
 }

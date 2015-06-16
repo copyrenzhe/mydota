@@ -1,9 +1,10 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Ability;
 use DB;
 
-Class Ability
+Class AbilityDb
 {
     public function update()
     {
@@ -13,14 +14,14 @@ Class Ability
         foreach($abilityAll as $name => $abilityObj){
             $ability = (array) $abilityObj;
             $ability['name'] = $name;
-            $this->save($item);
+            $this->save($ability);
         }
     }
 
     public function load($name)
     {
-        if(Item::where('name','=',$name)->first()){
-            return Item::where('name','=',$name)->first();
+        if(Ability::where('name','=',$name)->first()){
+            return Ability::where('name','=',$name)->first();
         }else{
             return false;
         }
@@ -28,10 +29,10 @@ Class Ability
 
     public function save(array $data)
     {
-        if(DB::table('ability')->where('name','=',$data['name'])){
-            $result = DB::table('ability')->where('id','=',$id)->update($data);
+        if(Ability::where('name','=',$data['name'])->first()){
+            $result = Ability::where('name','=',$data['name'])->update($data);
         }else{
-            $result = DB::table('item')->insert($data);
+            $result = Ability::create($data);
         }
         return $result;
     }

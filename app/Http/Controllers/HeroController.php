@@ -2,7 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\Heroes;
+use App\Repositories\HeroDb;
 use Illuminate\Http\Request;
 use App\Models\Hero;
 
@@ -15,10 +15,8 @@ class HeroController extends Controller {
 	 */
 	public function index()
 	{
-		$hero = new Heroes;
-		$hero->setHeroName('bane');
-		$r = $hero->load();
-		dd($r);
+		$hero = new HeroDb();
+		$hero->update();
 	}
 
 	public function lists()
