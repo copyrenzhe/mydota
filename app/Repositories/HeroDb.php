@@ -41,6 +41,20 @@ Class HeroDb
         }
     }
 
+    public function getImgUrlById($id, $lg=false)
+    {
+        $hero = Hero::find($id);
+        if($hero)
+            return $lg?'http://cdn.dota2.com/apps/dota2/images/heroes/'.$hero->name.'_hphover.png':'http://cdn.dota2.com/apps/dota2/images/heroes/'.$hero->name.'_sb.png';
+        else
+            return false;
+    }
+
+    public function getFieldById($id, $column = 'name')
+    {
+        return Hero::find($id)->$column;
+    }
+
     public function save(array $data)
     {
         if(Hero::where('name','=',$data['name'])->first()){

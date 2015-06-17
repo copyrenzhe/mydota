@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use Dota2Api\Data\Abilities;
 use Dota2Api\Data\Heroes;
+use App\Repositories\HeroDb;
 use Dota2Api\Data\Items;
+use App\Repositories\ItemsDb;
 use Dota2Api\Data\Lobbies;
 use Dota2Api\Data\Mods;
 use Dota2Api\Data\Regions;
@@ -30,10 +32,12 @@ class MatchController extends Controller
             }
         }
         $players = $playersMapperDb->load();
-        $heroes = new Heroes();
-        $heroes->parse();
-        $items = new Items();
-        $items->parse();
+        /*$heroes = new Heroes();
+        $heroes->parse();*/
+        $heroes = new HeroDb();
+        /*$items = new Items();
+        $items->parse();*/
+        $items = new ItemsDb();
         $abilities = new Abilities();
         $abilities->parse();
         $mods = new Mods();

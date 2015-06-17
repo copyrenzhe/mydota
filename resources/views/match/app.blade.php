@@ -3,7 +3,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Match info</title>
-        <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/global.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/global-chinese.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/heropedia.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/match.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="bodyContainer">

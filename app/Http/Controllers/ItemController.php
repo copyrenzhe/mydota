@@ -16,13 +16,14 @@ class ItemController extends Controller {
 	 */
 	public function index()
 	{
+		$items = new ItemsDb();
 		$itemSecret = Item::ofType('secret_shop')->get();
 		$itemComponent = Item::ofType('component')->get();
 		$itemConsumable = Item::ofType('consumable')->get();
 		$itemRare = Item::ofType('rare')->get();
 		$itemEpic = Item::ofType('epic')->get();
 		$itemArtifact = Item::ofType('artifact')->get();
-		// return view('item',compact('itemObj'));
+		return view('item',compact('itemSecret','itemComponent','itemConsumable','itemRare','itemEpic','itemArtifact','items'));
 	}
 
 }

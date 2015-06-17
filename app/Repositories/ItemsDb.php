@@ -27,6 +27,20 @@ Class ItemsDb
 		}
 	}
 
+	public function getFieldById($id, $column = 'name')
+    {
+        return Item::find($id)->$column;
+    }
+
+	public function getImgUrlById($id)
+	{
+		$item = Item::find($id);
+		if($item)
+			return 'http://cdn.dota2.com/apps/dota2/images/items/'.$item->img;
+		else
+			return false;
+	}
+
 	public function save(array $data)
 	{
 		$id = $data['id'];

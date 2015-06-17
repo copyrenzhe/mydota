@@ -98,7 +98,7 @@
                         @endif
                     </td>
                     <td><img src="{{ $heroes->getImgUrlById($team[$i]['hero_id']) }}" alt="" /></td>
-                    <td class="left"><strong>{{ $heroes->getFieldById($team[$i]['hero_id'], 'localized_name') }}/{{ $team[$i]['level'] }}</strong></td>
+                    <td class="left"><strong>{{ $heroes->getFieldById($team[$i]['hero_id'], 'dname') }}/{{ $team[$i]['level'] }}</strong></td>
                     <td>{{ $team[$i]['kda'] }}<br/>
                         {{ $team[$i]['k'] }}/{{ $team[$i]['d'] }}/{{ $team[$i]['a'] }}
                     </td>
@@ -109,7 +109,7 @@
                     <td class="left">
                         @for($j=0;$j<=5;$j++)
                             @if ($team[$i]['item_'.$j]!=$data['empty_item_id'])
-                            <img src="{{ $items->getImgUrlById($team[$i]['item_'.$j]) }}" alt="" />
+                            <img src="{{ $items->getImgUrlById($team[$i]['item_'.$j]) }}" alt="" title="{{$items->getFieldById($team[$i]['item_'.$j],'dname')}}" />
                             @endif
                         @endfor
                     </td>
