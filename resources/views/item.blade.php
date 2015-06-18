@@ -1,19 +1,7 @@
 @extends('match.app')
 
 @section('content')
-	<style>
-		.itemSecret{
-			width: 100%;
-			overflow: hidden;
-		}
-		.itemSecret div{
-			overflow: hidden;
-			float: left;
-		}
-		.itemSecret div img{
-			height: 64px;
-		}
-	</style>
+
 	<div class="itemSecret">
 	<h2>itemComponent</h2>
 	@foreach($itemComponent as $key => $item)

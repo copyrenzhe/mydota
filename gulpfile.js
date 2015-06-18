@@ -13,13 +13,14 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less('app.less','resources/css')
-        .less('index.less','resources/css/index.css','resource/assets/less');
+        .less('index.less','resources/css/index.css','resource/assets/less')
+        .less('item.less','public/css/item.css','resources/assets/less')
+        .less('match.css','public/css/match.css','resources/css');
 
     mix
         .styles('libs/global.css','public/css/global.css','resources/css')
         .styles('libs/global-chinese.css','public/css/global-chinese.css','resources/css')
         .styles('libs/heropedia.css','public/css/heropedia.css','resources/css')
-        .styles('match.css','public/css/match.css','resources/css')
         .styles([
         	'app.css',
         	'index.css'
