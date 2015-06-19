@@ -22,6 +22,7 @@ cd mydota
 composer install
 npm install
 touch .env
+touch api-key.php
 apt-get install beanstalkd
 ```
 ② 导入数据库，并修改 `.env` 配置文件：
@@ -32,6 +33,15 @@ apt-get install beanstalkd
 ```bash
 php artisan migrate
 ```
+
+>配制api-key.php如下：
+>**API_KEY**可以在[steam申请](http://steamcommunity.com/dev/apikey)
+```php
+define('API_KEY','*********');	
+\Dota2Api\Api::init(API_KEY,array('localhost','user','password','db_name',''),true);	//根椐数据库实际情况修改
+```
+
+
 ③ 运行系统：
 保证8000端口未被占用后
 执行命令：
