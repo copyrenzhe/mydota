@@ -17,7 +17,10 @@ class HeroController extends Controller {
 	public function index()
 	{
 		$hero = new HeroDb();
-		$hero->update();
+		$heroStr = Hero::ofType('str')->get();
+		$heroAgi = Hero::ofType('agi')->get();
+		$heroInt = Hero::ofType('int')->get();
+		return view('hero',compact('hero','heroStr','heroAgi','heroInt'));
 	}
 
 	public function ability()
