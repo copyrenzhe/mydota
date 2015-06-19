@@ -59,6 +59,12 @@ php artisan serve
 `localhost:8000/queue/history/matches/2` 	*采集难度为`hard`的最近的25场比赛*
 `localhost:8000/queue/history/matches/2` 	*采集难度为`very hard`的最近的25场比赛*
 
+###TODO
+* 用户搜索，未采集到的用户，可以加入采集
+* 英雄胜率排名
+* 邮件推送最近比赛详情
+
+
 ### 引用的框架与包
 * [Laravel/laravel](https://github.com/laravel/laravel)
 * [kronusme/dota2-api](https://github.com/kronusme/dota2-api)
