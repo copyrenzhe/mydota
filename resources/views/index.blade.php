@@ -1,5 +1,7 @@
-@extends('app')
-
+@extends('match.app')
+@section('styles')
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+@stop
 @section('content')
 <div class="container">
 	<div class="header">

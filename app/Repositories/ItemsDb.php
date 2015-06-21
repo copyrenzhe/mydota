@@ -36,7 +36,8 @@ Class ItemsDb
 	{
 		$item = Item::find($id);
 		if($item)
-			return 'http://cdn.dota2.com/apps/dota2/images/items/'.$item->img;
+			// return 'http://cdn.dota2.com/apps/dota2/images/items/'.$item->img;
+			return 'http://cdn.dota2.com.cn/apps/dota2/images/items/'.$item->img;
 		else
 			return false;
 	}

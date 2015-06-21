@@ -1,6 +1,6 @@
 # DotA2信息管理系统(mydota)
 
-> mydota是一个DotA2信息管理系统，基于`Laravel 5` 开发而成，通过Steam官方提供的接口采集DotA2的比赛数据，由于采用了[eanstalkd](https://github.com/kr/beanstalkd)队列，推荐采用Linux作为服务器。
+> mydota是一个DotA2信息管理系统，基于`Laravel 5` 开发而成，通过Steam官方提供的接口采集DotA2的比赛数据，由于采用了[beanstalkd](https://github.com/kr/beanstalkd)队列，推荐采用Linux作为服务器。
 
 ###环境要求
 * PHP5.5+

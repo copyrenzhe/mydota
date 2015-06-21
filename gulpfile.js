@@ -12,19 +12,18 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less','resources/css')
-        .less('index.less','resources/css/index.css','resource/assets/less')
-        .less('item.less','public/css/item.css','resources/assets/less')
-        .less('match.css','public/css/match.css','resources/css');
+    mix
+        .less('app.less','resources/css')
+        .less('index.less','resources/css','resource/assets/less')
+        .less('match.less','public/css','resources/assets/less')
+        .less('item.less','public/css','resources/assets/less');
 
     mix
         .styles('libs/global.css','public/css/global.css','resources/css')
         .styles('libs/global-chinese.css','public/css/global-chinese.css','resources/css')
         .styles('libs/heropedia.css','public/css/heropedia.css','resources/css')
-        .styles([
-        	'app.css',
-        	'index.css'
-        ],'public/css/index.css','resources/css');
+        .styles('app.css','public/css/app.css','resources/css')
+        .styles('index.css','public/css/index.css','resources/css');
 
     mix.scripts([
             'require.js',

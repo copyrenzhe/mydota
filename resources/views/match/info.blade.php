@@ -1,5 +1,7 @@
 @extends('match.app')
-
+@section('styles')
+    <link href="{{ asset('css/match.css') }}" rel="stylesheet" type="text/css" />
+@stop
 @section('content')
     <h3>比赛 # {{ $match->get('match_id') }}
     (
