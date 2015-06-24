@@ -1,6 +1,7 @@
 @extends('match.app')
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('css/item.css') }}">
+@stop
 @section('content')
 	<div class="itemSecret">
     <h2>消耗品</h2>
