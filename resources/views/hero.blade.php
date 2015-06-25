@@ -19,7 +19,7 @@
 
 	<div class="agihero">
 		<div class="columnHeader">
-			<span class="column" id="columnAgi">力量</span>
+			<span class="column" id="columnAgi">敏捷</span>
 		</div>
 		<div class="herolist">
 			@foreach($heroAgi as $key=>$hero)
@@ -32,7 +32,7 @@
 
 	<div class="inthero">
 		<div class="columnHeader">
-			<span class="column" id="columnInt">力量</span>
+			<span class="column" id="columnInt">智力</span>
 		</div>
 		<div class="herolist">
 			@foreach($heroInt as $key=>$hero)
