@@ -10,3 +10,4 @@ composer.lock
 .tags_sorted_by_file
 gulp
 *.map
+tags
