@@ -52,12 +52,12 @@ php artisan serve
 
 ④数据采集
 >运行：
-`beanstalkd -l 127.0.0.1 -p 11300` 			*运行beanstalkd*
-`localhost:8000/queue/items` 				*采集物品信息*
-`localhost:8000/queue/heroes` 				*采集英雄信息*
-`localhost:8000/queue/history/matches/1` 	*采集难度为`normal`的最近的25场比赛*
-`localhost:8000/queue/history/matches/2` 	*采集难度为`hard`的最近的25场比赛*
-`localhost:8000/queue/history/matches/2` 	*采集难度为`very hard`的最近的25场比赛*
+>`beanstalkd -l 127.0.0.1 -p 11300` 			*运行beanstalkd*
+>`localhost:8000/queue/items` 				*采集物品信息*
+>`localhost:8000/queue/heroes` 				*采集英雄信息*
+>`localhost:8000/queue/history/matches/1` 	*采集难度为`normal`的最近的25场比赛*
+>`localhost:8000/queue/history/matches/2` 	*采集难度为`hard`的最近的25场比赛*
+>`localhost:8000/queue/history/matches/2` 	*采集难度为`very hard`的最近的25场比赛*
 
 ###TODO
 * 用户搜索，未采集到的用户，可以加入采集
