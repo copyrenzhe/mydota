@@ -16,7 +16,8 @@ elixir(function(mix) {
         .less('app.less','resources/css')
         .less('index.less','resources/css')
         .less('match.less','public/css')
-        .less('item.less','public/css');
+        .less('item.less','public/css')
+        .less('hero.less','public/css');
 
     mix
         .styles('libs/global.css','public/css/global.css','resources/css')
@@ -25,18 +26,20 @@ elixir(function(mix) {
         .styles('app.css','public/css/app.css','resources/css')
         .styles('index.css','public/css/index.css','resources/css');
 
-    mix.version([
-        'css/app.css',
-        'css/index.css',
-        'css/match.css',
-        'css/item.css',
-        'css/global.css',
-        'css/global-chinese.css',
-        'css/heropedia.css',
-        'js/app.js'
+    mix
+        .version([
+            'css/app.css',
+            'css/index.css',
+            'css/match.css',
+            'css/item.css',
+            'css/global.css',
+            'css/global-chinese.css',
+            'css/heropedia.css',
+            'js/app.js'
         ]);
 
-    mix.scripts([
+    mix
+        .scripts([
             'require.js',
             'config.js'
         ],'public/js/app.js','resources/js');

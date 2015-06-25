@@ -4,14 +4,15 @@
 @stop
 
 @section('content')
+<div class="allhero">
 	<div class="strhero">
 		<div class="columnHeader">
 			<span class="column" id="columnStr">力量</span>
 		</div>
 		<div class="herolist">
-			@foreach($heroStr as $key=>$hero)
+			@foreach($heroStr as $key=>$item)
 				<a href="">
-					<img src="{{$hero->getImgUrlById($key)}}" alt="">
+					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach
 		</div>
@@ -22,9 +23,9 @@
 			<span class="column" id="columnAgi">敏捷</span>
 		</div>
 		<div class="herolist">
-			@foreach($heroAgi as $key=>$hero)
+			@foreach($heroAgi as $key=>$item)
 				<a href="">
-					<img src="{{$hero->getImgUrlById($key)}}" alt="">
+					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach
 		</div>
@@ -35,11 +36,12 @@
 			<span class="column" id="columnInt">智力</span>
 		</div>
 		<div class="herolist">
-			@foreach($heroInt as $key=>$hero)
+			@foreach($heroInt as $key=>$item)
 				<a href="">
-					<img src="{{$hero->getImgUrlById($key)}}" alt="">
+					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach
 		</div>
 	</div>
+</div>
 @stop

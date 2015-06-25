@@ -1,0 +1,25 @@
+.allhero {
+  padding: 0 10px 10px 20px;
+  overflow: hidden;
+}
+.allhero .strhero .agihero .inthero {
+  overflow: hidden;
+}
+.allhero .strhero .agihero .inthero .column {
+  font-size: 16px;
+  padding: 6px 10px 15px 40px;
+}
+.allhero .strhero .agihero .inthero #columnStr {
+  background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_str.png') no-repeat;
+}
+.allhero .strhero .agihero .inthero #columnAgi {
+  background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_agi.png') no-repeat;
+}
+.allhero .strhero .agihero .inthero #columnInt {
+  background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_int.png') no-repeat;
+}
+.allhero .strhero .agihero .inthero .herolist {
+  float: left;
+}
+
+/*# sourceMappingURL=hero.css.map */

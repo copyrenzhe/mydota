@@ -1,1 +1,80 @@
-*{color:#ccc;font-size:13px;text-shadow:1px 1px 1px rgba(0,0,0,.5)}a{color:#A9CF54!important}h1,h2,h3{text-align:center}h2{font-size:16px;color:#92A525}div#heroPickerInner{padding:0 20px}img.avatar{width:20px}img.ability{width:24px;margin-right:3px}p{font-family:Tahoma}div.common-stats{margin:10px 0 0 10px;float:left;padding-right:10px}div.slots-wrapper{background-color:#222;box-shadow:inset 0 0 4px rgba(0,0,0,.5);padding:5px}table.picks_bans{margin:20px 20px 0 0}table.slots{border-collapse:collapse;width:100%;position:relative}table.slots tr.slot.odd{background-color:rgba(255,255,255,.078)}table.slots tr.slot.even{background-color:rgba(255,255,255,.039)}table.slots img{box-shadow:0 0 5px rgba(0,0,0,.5)}tr.thead td{font-weight:700}tr.total td{font-weight:700;padding-bottom:20px}td{font-family:Tahoma;text-align:center;padding:2px 5px}td.left{text-align:left}td.abilities{padding-bottom:5px}.slots img{height:28px}
+* {
+  color: #ccc;
+  font-size: 13px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+a {
+  color: #A9CF54 !important;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+h2 {
+  font-size: 16px;
+  color: #92A525;
+}
+div#heroPickerInner {
+  padding: 0 20px;
+}
+img.avatar {
+  width: 20px;
+}
+img.ability {
+  width: 24px;
+  margin-right: 3px;
+}
+p {
+  font-family: Tahoma;
+}
+div.common-stats {
+  margin: 10px 0 0 10px;
+  float: left;
+  padding-right: 10px;
+}
+div.slots-wrapper {
+  background-color: #222;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+  padding: 5px;
+}
+table.picks_bans {
+  margin: 20px 20px 0 0;
+}
+table.slots {
+  border-collapse: collapse;
+  width: 100%;
+  position: relative;
+}
+table.slots tr.slot.odd {
+  background-color: rgba(255, 255, 255, 0.078);
+}
+table.slots tr.slot.even {
+  background-color: rgba(255, 255, 255, 0.039);
+}
+table.slots img {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+tr.thead td {
+  font-weight: 700;
+}
+tr.total td {
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+td {
+  font-family: Tahoma;
+  text-align: center;
+  padding: 2px 5px;
+}
+td.left {
+  text-align: left;
+}
+td.abilities {
+  padding-bottom: 5px;
+}
+.slots img {
+  height: 28px;
+}
+
+/*# sourceMappingURL=match.css.map */
