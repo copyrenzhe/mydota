@@ -80,8 +80,8 @@ Route::group(['prefix' => 'hero'],function(){
     Route::get('index',['as'=>$resource . 'index','uses'=>$controller.'index']);
     Route::get('ability',['as'=>$resource . 'ability','uses'=>$controller.'ability']);
     #hero info
-    Route::get('{hero_name}',['uses'=>$controller.'info'])
-    ->where('hero_name','w+');
+    Route::get('{hero_name}',$controller.'info')
+    ->where('hero_name','\w+');
 });
 
 /**

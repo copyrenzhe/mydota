@@ -20,12 +20,13 @@ class HeroController extends Controller {
 		$heroStr = Hero::ofType('str')->get();
 		$heroAgi = Hero::ofType('agi')->get();
 		$heroInt = Hero::ofType('int')->get();
-		return view('hero',compact('hero','heroStr','heroAgi','heroInt'));
+		return view('hero.index',compact('hero','heroStr','heroAgi','heroInt'));
 	}
 
-	public function info($name)
+	public function info($hero_name)
 	{
-		dd($name);
+		$hero = Hero::where('name','=',$hero_name)->get();
+		dd($hero);
 	}
 
 	public function ability()
