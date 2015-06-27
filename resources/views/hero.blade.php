@@ -11,7 +11,7 @@
 		</div>
 		<div class="herolist">
 			@foreach($heroStr as $key=>$item)
-				<a href="">
+				<a href="{{ url('/hero/'.$item->name) }}">
 					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach
@@ -24,7 +24,7 @@
 		</div>
 		<div class="herolist">
 			@foreach($heroAgi as $key=>$item)
-				<a href="">
+				<a href="{{ url('/hero/'.$item->name) }}">
 					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach
@@ -37,7 +37,7 @@
 		</div>
 		<div class="herolist">
 			@foreach($heroInt as $key=>$item)
-				<a href="">
+				<a href="{{ url('/hero/'.$item->name) }}">
 					<img src="{{$hero->getImgUrlById($item->id)}}" alt="" title="{{$item->dname}}">
 				</a>
 			@endforeach

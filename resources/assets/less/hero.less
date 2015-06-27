@@ -1,9 +1,20 @@
+@str-background : 'http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_str.png';
+@agi-background : 'http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_agi.png';
+@int-background : 'http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_int.png';
+
 .allhero{
 	padding: 0 10px 10px 20px;
 	overflow: hidden;
-	.strhero .agihero .inthero{
+	.columnHeader{
+		margin:10px 0;
+		height: 42px;
+		overflow: hidden;
+	}
+	.strhero, .agihero, .inthero{
 		overflow: hidden;
 		.column{
+			height: 42px;
+			line-height: 42px;
 			font-size: 16px;
 			padding: 6px 10px 15px 40px;
 		}
@@ -13,17 +24,17 @@
     }
     .strhero{
 		#columnStr{
-			background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_str.png') no-repeat;
+			background: url(@str-background) no-repeat 0 center;
 		}
 	}
 	.agihero{
 		#columnAgi{
-			background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_agi.png') no-repeat;
+			background: url(@agi-background) no-repeat 0 center;
 		}
     }
     .inthero{
 		#columnInt{
-			background: url('http://cdn.dota2.com.cn/apps/dota2/images/heropedia/overviewicon_int.png') no-repeat;
+			background: url(@int-background) no-repeat 0 center;
 		}
 
 	}

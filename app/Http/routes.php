@@ -66,7 +66,6 @@ Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
 Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
-Route::get('/heros/{hero_name?}', ['as'=>'home.heros', 'uses'=>'HomeController@heros']);
 
 // Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@search']);
 Route::get('/search/{text}',['as' => 'home.search', 'uses' => 'HomeController@search']);
@@ -81,7 +80,7 @@ Route::group(['prefix' => 'hero'],function(){
     Route::get('index',['as'=>$resource . 'index','uses'=>$controller.'index']);
     Route::get('ability',['as'=>$resource . 'ability','uses'=>$controller.'ability']);
     #hero info
-    Route::get('info/{hero_name}',['uses'=>$controller.'info'])
+    Route::get('{hero_name}',['uses'=>$controller.'info'])
     ->where('hero_name','w+');
 });
 

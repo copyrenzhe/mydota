@@ -23,6 +23,11 @@ class HeroController extends Controller {
 		return view('hero',compact('hero','heroStr','heroAgi','heroInt'));
 	}
 
+	public function info($name)
+	{
+		dd($name);
+	}
+
 	public function ability()
 	{
 		$ability = new AbilityDb();
