@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Match;
 use App\Repositories\SteamRepository as Steam;
+use App\Models\User;
 
 class ApiController extends Controller
 {
@@ -119,7 +120,12 @@ class ApiController extends Controller
      */
     public function sendMails()
     {
-        
+        $userList = User::where('is_subscribe','=',1)->get();
+        foreach ($userList as $key => $user) {
+            # code...
+        }
+        // \Queue::push('sendMailsQueue',['userList'=>$userList]);
+        // return 'mail subscribe add to queue!';
     }
 
     public function test()
