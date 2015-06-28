@@ -10,6 +10,9 @@
 			<span class="hero-name">
 				{{$hero->dname}}
 			</span>
+			<span class="droles">
+				{{$hero->dac}}-{{$hero->droles}}
+			</span>
 		</div>
 	</div>
 	<div class="history">
