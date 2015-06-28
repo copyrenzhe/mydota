@@ -113,6 +113,15 @@ class ApiController extends Controller
         return $search_r;
     }
 
+    /**
+     * send mails subscribe
+     * @return  string
+     */
+    public function sendMails()
+    {
+        
+    }
+
     public function test()
     {
         $playersMapperWeb = new \Dota2Api\Mappers\PlayersMapperWeb();

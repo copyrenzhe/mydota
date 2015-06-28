@@ -483,6 +483,7 @@ CREATE TABLE `users` (
   `avatar` varchar(200) NOT NULL,
   `profileurl` varchar(128) NOT NULL,
   `is_personaname_real` tinyint(1) NOT NULL DEFAULT '0',
+  `is_subscribe` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`account_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

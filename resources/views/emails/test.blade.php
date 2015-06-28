@@ -1,1 +1,0 @@
-Hello, It's a test email . {{ $name }}

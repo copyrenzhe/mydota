@@ -62,6 +62,15 @@
  * });
  */
 
+Route::get('mail',function(){
+    $data = ['name' => 'maple'];
+    Mail::send('emails.subscribe',$data,function($message){
+        $message->to('copyrenzhe@163.com')->subject("DOTA2每周战绩");
+        $message->attach((public_path().'/css/app.css'));
+    });
+    return 'success';
+});
+
 Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
 Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
@@ -111,6 +120,8 @@ Route::group(['prefix' => 'queue'], function () {
     #matches
     Route::get('history/matches/{skill}', ['as' => $resource . 'getHistoryMatches', 'uses' => $controller . 'getHistoryMatches'])
     ->where('skill', '[0-3]');
+    #mail
+    Route::get('emails', ['as' => $resource. 'sendMails','uses' => $controller. 'sendMails']);
 });
 
 Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info'])
