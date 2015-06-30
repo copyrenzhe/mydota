@@ -71,6 +71,7 @@ Route::get('mail',function(){
     return 'success';
 });
 
+
 Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
 Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
@@ -132,4 +133,3 @@ Route::controllers([
     'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('test', 'ApiController@test');
