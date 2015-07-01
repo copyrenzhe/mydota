@@ -72,6 +72,7 @@ Route::get('mail',function(){
 });
 
 
+
 Route::get('/', ['as' => 'index.index', 'uses' => 'IndexController@index']);
 
 Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
