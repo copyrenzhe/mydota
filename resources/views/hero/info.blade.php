@@ -18,6 +18,13 @@
 	<div class="history">
 		
 	</div>
+	
+	<div class="hero-detail">
+		
+	</div>
 
+	<div class="ability">
+		
+	</div>
 </div>
 @stop
