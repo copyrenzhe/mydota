@@ -41,11 +41,28 @@ Class HeroDb
         }
     }
 
-    public function getImgUrlById($id, $lg=false)
+    public function getImgUrlById($id, $lg=0)
     {
         $hero = Hero::find($id);
         if($hero)
-            return $lg?'http://cdn.dota2.com/apps/dota2/images/heroes/'.$hero->name.'_hphover.png':'http://cdn.dota2.com/apps/dota2/images/heroes/'.$hero->name.'_sb.png';
+            switch ($lg) {
+                //小头像
+                case 0:
+                    return 'http://cdn.dota2.com.cn/apps/dota2/images/heroes/'.$hero->name.'_sb.png';
+                    break;
+                //hover头像
+                case 1:
+                    return 'http://cdn.dota2.com.cn/apps/dota2/images/heroes/'.$hero->name.'_hphover.png';
+                    break;
+                //完整头像
+                case 2:
+                    return 'http://cdn.dota2.com.cn/apps/dota2/images/heroes/'.$hero->name.'_full.png';
+                    break;
+                //全身像
+                default:
+                    return 'http://cdn.dota2.com.cn/apps/dota2/images/heroes/'.$hero->name.'_vert.jpg';
+                    break;
+            }
         else
             return false;
     }

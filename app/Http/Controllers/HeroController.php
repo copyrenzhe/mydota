@@ -6,6 +6,7 @@ use App\Repositories\HeroDb;
 use App\Repositories\AbilityDb;
 use Illuminate\Http\Request;
 use App\Models\Hero;
+use App\Models\Ability;
 
 class HeroController extends Controller {
 
@@ -27,7 +28,9 @@ class HeroController extends Controller {
 	{
 		$hero = Hero::where('name','=',$hero_name)->get();
 		$heroDb = new HeroDb();
-		return view('hero.info',compact('hero'));
+		$abilities = Ability::where('hurl','=',$hero->u)->get();
+
+		return view('hero.info',compact('hero','abilities'));
 	}
 
 	public function ability()

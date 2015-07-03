@@ -4,7 +4,7 @@
 <div class="content">
 	<div class="hero-header">
 		<div class="hero-img">
-			<img src="{{$heroDb->getImgUrlById($hero->id,true)}}" alt="" title="{{$hero->dname}}">
+			<img src="{{$heroDb->getImgUrlById($hero->id,2)}}" alt="" title="{{$hero->dname}}">
 		</div>
 		<div class="hero-info">
 			<span class="hero-name">
@@ -23,8 +23,12 @@
 		
 	</div>
 
-	<div class="ability">
-		
+	<div class="abilities">
+		@foreach($abilities as $ability)
+            <div class="abilityRow">
+                <span>{{$ability->dname}}</span>
+            </div>
+        @endforeach
 	</div>
 </div>
 @stop
