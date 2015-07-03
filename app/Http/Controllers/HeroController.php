@@ -29,8 +29,8 @@ class HeroController extends Controller {
 		$hero = Hero::where('name','=',$hero_name)->get();
 		$heroDb = new HeroDb();
 		$abilities = Ability::where('hurl','=',$hero->u)->get();
-
-		return view('hero.info',compact('hero','abilities'));
+		$abilityDb = new AbilityDb();
+		return view('hero.info',compact('hero','abilities','abilityDb'));
 	}
 
 	public function ability()

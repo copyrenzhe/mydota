@@ -26,7 +26,28 @@
 	<div class="abilities">
 		@foreach($abilities as $ability)
             <div class="abilityRow">
-                <span>{{$ability->dname}}</span>
+                <div class="abilityIcon">
+                    <img src="{{$abilityDb->getImgUrlById($ability->id,1)}}" alt="" title="{{$ability->dname}}">
+                </div>
+                
+                <div class="abilityDesc">
+                    <span>{{$ability->dname}}</span>
+                    <p>
+                        {{$ability->desc}}
+                    </p>
+                </div>
+                <div class="abilityAffects">
+                    {{$ability->affects}}
+                </div>
+                <div class="abilityAttrib">
+                    {{$ability->attrib}}
+                </div>
+                <div class="abilityNotes">
+                    {{$ability->notes}}
+                </div>
+                <div class="abilityLore">
+                    {{$ability->lore}}
+                </div>
             </div>
         @endforeach
 	</div>
