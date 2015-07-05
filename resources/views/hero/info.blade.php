@@ -20,7 +20,9 @@
 	</div>
 	
 	<div class="hero-detail">
-		
+		<span>{{$hero->str_b}}</span>+<span>{{$hero->str_g}}</span>
+        <span>{{$hero->agi_b}}</span>+<span>{{$hero->agi_g}}</span>
+        <span>{{$hero->int_b}}</span>+<span>{{$hero->int_g}}</span>
 	</div>
 
 	<div class="abilities">
