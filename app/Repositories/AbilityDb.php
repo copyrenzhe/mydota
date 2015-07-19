@@ -35,10 +35,10 @@ Class AbilityDb
     public function getImgUrlById($id, $lg=1)
     {
         $ability = Ability::find($id);
-        if($ability)
-            return 'http://cdn.dota2.com.cn/apps/dota2/images/abilities/'.$ability->name.'_hp'.$lg.'.png'
-        else
-            return false;
+        if($ability){
+            return 'http://cdn.dota2.com.cn/apps/dota2/images/abilities/'.$ability->name.'_hp'.$lg.'.png';
+        }
+        return false;
     }
 
     public function save(array $data)

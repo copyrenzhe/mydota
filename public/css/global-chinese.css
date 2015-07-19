@@ -1,1 +1,30 @@
-html{box-sizing:border-box}*,::after,::before{box-sizing:inherit}body{background-color:#000;font-family:YouYuan,"Microsoft YaHei",Radiance,Verdana}@font-face{font-family:Radiance;font-style:normal;font-weight:400;src:url(http://cdn.dota2.com/apps/dota2/fonts/radiance.eot?#iefix) format("embedded-opentype"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance.woff) format("woff"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance.ttf) format("truetype"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance.svg#ywftsvg) format("svg")}@font-face{font-family:Radiance-SemiBold;font-style:normal;font-weight:400;src:url(http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.eot?#iefix) format("embedded-opentype"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.woff) format("woff"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.ttf) format("truetype"),url(http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg) format("svg")}.DotaFont{font-family:YouYuan,"Microsoft YaHei",Radiance,Verdana}
+
+html {
+    box-sizing: border-box;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+body {
+    background-color: #000;
+}
+@font-face {
+    font-family: "Radiance";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://cdn.dota2.com/apps/dota2/fonts/radiance.eot?#iefix") format("embedded-opentype"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance.woff") format("woff"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance.ttf") format("truetype"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance.svg#ywftsvg") format("svg");
+}
+@font-face {
+    font-family: "Radiance-SemiBold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.eot?#iefix") format("embedded-opentype"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.woff") format("woff"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.ttf") format("truetype"), url("http://cdn.dota2.com/apps/dota2/fonts/radiance-semibold.svg#ywftsvg") format("svg");
+}
+body {
+    font-family: "YouYuan","Microsoft YaHei","Radiance",Verdana;
+}
+.DotaFont {
+    font-family: "YouYuan","Microsoft YaHei","Radiance",Verdana;
+}
+
+/*# sourceMappingURL=global-chinese.css.map */

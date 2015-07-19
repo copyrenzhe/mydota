@@ -22,6 +22,7 @@
 }
 .container {
   /* vars */
+  color: #444444;
 }
 .container .search-box {
   width: 500px;
