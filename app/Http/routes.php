@@ -79,7 +79,20 @@ Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
 
 // Route::get('/search/{text}', ['as' => 'api.search', 'uses' => 'ApiController@search']);
-Route::get('/search/{text}',['as' => 'home.search', 'uses' => 'HomeController@search']);
+Route::get('/search/{text}',['as' => 'index.search', 'uses' => 'IndexController@search']);
+
+/**
+ * players
+ */
+Route::group(['prefix' => 'player'],function(){
+    $controller = 'PlayerController@';
+    $resource = 'player.';
+    #player detail
+    Route::get('detail/{account_id}',['as'=>$resource.'detail','uses'=>$controller.'index']);
+    #player history
+    Route::get('history',['as'=>$resource.'history','uses'=>$controller.'history']);
+});
+
 
 /**
  * heroes

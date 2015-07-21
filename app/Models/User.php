@@ -9,4 +9,9 @@ class User extends Model {
 	public $timestamps = false;
 	protected $primaryKey = 'account_id';
 
+    public function scopeofText($query,$text)
+    {
+        return $query->where('personaname', 'like', '%'.$text.'%')->orWhere('account_id', 'like', '%'.$text.'%');
+    }
+
 }

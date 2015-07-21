@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-
+use App\Model\User;
 
 class HomeController extends Controller {
 
@@ -36,14 +36,5 @@ class HomeController extends Controller {
 	}
 
 
-	/**
-	 * search player name
-	 * @param string $text player's name
-	 * 
-	 */
-	public function search($text)
-	{
-		
-	}
 
 }
