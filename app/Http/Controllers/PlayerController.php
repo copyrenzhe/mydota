@@ -30,6 +30,7 @@ class PlayerController extends Controller {
 				}
 			}
 		}
+		$winRate = $winNum/count($matches);
 		dd(count($matches),$winNum);
 		echo $winNum;
 		// return view('player.index',compact('info'));	
