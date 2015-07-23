@@ -50,4 +50,38 @@
         unset($file);
 	}
 
+	/**
+	 * 格式化数字
+	 * @param  float  $float  欲格式化的数字	    
+	 * @param  integer $num    欲保留的精度
+	 * @param  boolean $is_round   是否四舍五入
+	 * @param  boolean $is_percent 是否以百分比形式显示结果
+	 * @return string 
+	 */
+	function formatFloat($float,$num=2,$is_round=true,$is_percent=true)
+	{
+		if($is_round){
+			if($is_percent){
+				return sprintf('%.'.$num.'f',$float*100).'%';
+			}
+			return sprintf('%.'.$num.'f',$float);
+		} else {
+			if($is_percent){
+				$arr = explode('.', $float*100);
+				if(isset($arr[1])){
+					$arr[1] = substr($arr[1],0,$num);
+				}
+				return implode('.', $arr).'%';
+			} else {
+				$arr = explode('.', $float);
+				if(isset($arr[1])){
+					$arr[1] = substr($arr[1],0,$num);
+				}
+				return implode('.', $arr);
+			}
+
+		}
+
+	}
+
 ?>

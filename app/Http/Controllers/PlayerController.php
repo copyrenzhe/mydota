@@ -12,7 +12,7 @@ class PlayerController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
-	 *
+	 * testUrl : http://localhost:8000/player/detail/111720141
 	 * @return Response
 	 */
 	public function index($account_id)
@@ -30,10 +30,8 @@ class PlayerController extends Controller {
 				}
 			}
 		}
-		$winRate = $winNum/count($matches);
-		dd(count($matches),$winNum);
-		echo $winNum;
-		// return view('player.index',compact('info'));	
+		$winRate = formatFloat($winNum/count($matches));
+		return view('player.index',compact('info'));	
 	}
 
 
