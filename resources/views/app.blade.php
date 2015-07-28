@@ -13,7 +13,7 @@
     </head>
     <body>
         <nav class="navbar navbar-default" id="container-header">
-            <div class="container-fluid">
+            <div class="container-fluid dt-header">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{ url('/') }}">MyDotA</a>
                 </div>

@@ -137,6 +137,8 @@ Route::group(['prefix' => 'queue'], function () {
     ->where('skill', '[0-3]');
     #mail
     Route::get('emails', ['as' => $resource. 'sendMails','uses' => $controller. 'sendMails']);
+    #test
+    Route::get('tests',$controller.'test');
 });
 
 Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info'])
