@@ -121,7 +121,7 @@ class MatchesDb extends MatchMapperDb
                 $steamid = Player::convertId($account_id);
                 $playersInfo = $playersMapperWeb->addId($steamid)->load();
                 $personaname = $playersInfo[$steamid]->get('personaname');
-                $avatar = $playersInfo[$steamid]->get('avatar');
+                $avatar = $this->changeAvatar($playersInfo[$steamid]->get('avatar'));
                 $profileurl = $playersInfo[$steamid]->get('profileurl');
                 // update accounts
                 $db->updatePDO(Db::realTablename('users'), array(
@@ -141,5 +141,17 @@ class MatchesDb extends MatchMapperDb
                 );
             }
         }
+    }
+
+    /**
+     * change steamcdn to cdn.dota2.com.cn
+     * @param  string $picUrl 
+     * @return string 
+     */
+    private function changeAvatar($picUrl)
+    {
+        $search = 'https://steamcdn-a.akamaihd.net';
+        $replace = 'http://http://cdn.dota2.com.cn';
+        return str_replace($search, $replace, $picUrl);
     }
 }
