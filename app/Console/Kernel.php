@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel {
 	protected $commands = [
 		'App\Console\Commands\Inspire',
 		'App\Console\Commands\Test',
+		'App\Console\Commands\Sync'
 	];
 
 	/**
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel {
 		$schedule->command('inspire')
 				 ->hourly();
 		$schedule->command('test')->cron('* * * * *');
+		$schedule->command('sync')->dailyAt('3:00');
 	}
 
 }

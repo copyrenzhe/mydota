@@ -23,7 +23,7 @@ class ItemController extends Controller {
 		$itemRare = Item::ofType('rare')->get();
 		$itemEpic = Item::ofType('epic')->get();
 		$itemArtifact = Item::ofType('artifact')->get();
-		return view('item',compact('itemSecret','itemComponent','itemConsumable','itemRare','itemEpic','itemArtifact','items'));
+		return view('item.index',compact('itemSecret','itemComponent','itemConsumable','itemRare','itemEpic','itemArtifact','items'));
 	}
 
 }
