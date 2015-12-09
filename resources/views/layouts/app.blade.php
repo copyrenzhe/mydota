@@ -42,8 +42,8 @@
         </nav>
         <div id="bodyContainer">
             <div id="centerColOuter_NoCallout">
-                <div id="centerColTopShadow"><img src="http://media.steampowered.com/apps/dota2/images/heropedia/centercolbox_top_shadow.png" width="984" height="25" alt="" /></div>
-                <div id="centerColTop"><img src="http://media.steampowered.com/apps/dota2/images/heropedia/centercolbox_top.png" width="984" height="9" alt="" /></div>
+                <div id="centerColTopShadow"><img src="http://cdn.dota2.com.cn/apps/dota2/images/heropedia/centercolbox_top_shadow.png" width="984" height="25" alt="" /></div>
+                <div id="centerColTop"><img src="http://cdn.dota2.com.cn/apps/dota2/images/heropedia/centercolbox_top.png" width="984" height="9" alt="" /></div>
                 <div id="centerColContainer">
                     <div id="centerColContent">
                         <div class="redboxOuter"style="margin: 0 auto;">
@@ -58,8 +58,8 @@
                         </div>
                     </div>
                 </div>
-                <div id="centerColBottom"><img src="http://media.steampowered.com/apps/dota2/images/heropedia/centercolbox_bottom.png" width="984" height="9" alt="" /></div>
-                <div id="centerColBottomShadow"><img src="http://media.steampowered.com/apps/dota2/images/heropedia/centercolbox_bottom_shadow.png" width="984" height="25" alt="" /></div>
+                <div id="centerColBottom"><img src="http://cdn.dota2.com.cn/apps/dota2/images/heropedia/centercolbox_bottom.png" width="984" height="9" alt="" /></div>
+                <div id="centerColBottomShadow"><img src="http://cdn.dota2.com.cn/apps/dota2/images/heropedia/centercolbox_bottom_shadow.png" width="984" height="25" alt="" /></div>
             </div>
         </div>
     </body>

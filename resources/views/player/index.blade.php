@@ -1,4 +1,4 @@
-@extends('match.app')
+@extends('layouts.app')
 @section('styles')
 @stop
 @section('content')

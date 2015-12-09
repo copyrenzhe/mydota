@@ -19,10 +19,10 @@ Linux下执行下面命令：
 ```bash
 git clone https://github.com/copyrenzhe/mydota.git
 cd mydota
+touch api-key.php
 composer install
 npm install
 touch .env
-touch api-key.php
 apt-get install beanstalkd
 ```
 ② 导入数据库，并修改 `.env` 配置文件：

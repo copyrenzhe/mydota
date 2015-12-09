@@ -11,3 +11,4 @@ composer.lock
 gulp
 *.map
 tags
+npm-debug.log.*

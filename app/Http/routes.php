@@ -141,6 +141,18 @@ Route::group(['prefix' => 'queue'], function () {
     Route::get('tests',$controller.'test');
 });
 
+/**
+ * data synchronization
+ */
+Route::group(['prefix' => 'sync'], function () {
+    $controller = 'SyncController@';
+    $resource = 'sync.';
+    #items
+    Route::get('sync/items', ['as' => $resource . 'fetchItems', 'uses' => $controller . 'fetchItems']);
+    #heros
+    Route::get('sync/heros', ['as' => $resource . 'fetchHeros', 'uses' => $controller . 'fetchHeros']);
+});
+
 Route::get('/match/info/{matchid}', ['as' => 'match.info', 'uses' => 'MatchController@info'])
     ->where('matchid', '[0-9]+');
 

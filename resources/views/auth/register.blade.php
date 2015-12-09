@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.default')
 @section('styles')
 	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 @stop

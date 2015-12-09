@@ -1,4 +1,4 @@
-@extends('match.app')
+@extends('layouts.app')
 @section('styles')
     <link href="{{ asset('css/match.css') }}" rel="stylesheet" type="text/css" />
 @stop
