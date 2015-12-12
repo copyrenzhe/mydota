@@ -67,8 +67,8 @@ return [
 	|
 	*/
 
-	'encryption' => 'tls',
-
+	'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+	
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Server Username
@@ -119,6 +119,6 @@ return [
 	|
 	*/
 
-	'pretend' => false,
+	'pretend' => env('MAIL_PRETEND', false),
 
 ];

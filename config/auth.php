@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'model' => 'App\Models\Member',
+	'model' => App\Models\Member::class,
 
 	/*
 	|--------------------------------------------------------------------------
